@@ -116,6 +116,7 @@ refine_view_resolution_frame_button_resolution_high_csButton = {"container": wor
 workspace_refine_view_button_frame_QFrame = {"container": mainWindow_workspace_WorkSpace, "name": "refine_view_button_frame", "type": "QFrame", "visible": 1}
 workspace_progress_view_button_frame_QFrame = {"container": mainWindow_workspace_WorkSpace, "name": "progress_view_button_frame", "type": "QFrame", "visible": 1}
 refine_view_button_frame_button_refine_DelayButton = {"container": workspace_refine_view_button_frame_QFrame, "name": "button_refine", "type": "DelayButton", "visible": 1}
+refine_view_button_frame_button_cancel = {"container": workspace_refine_view_button_frame_QFrame, "name": "button_cancel", "type": "QPushButton", "visible": 1}
 progress_view_button_cancel_progress = {"container": workspace_progress_view_button_frame_QFrame, "name": "button_cancel_progress", "type": "QPushButton", "visible": 1}
 
 
