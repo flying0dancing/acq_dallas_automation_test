@@ -63,6 +63,10 @@ general_increase_csButton = {"container": mainWindow_workspace_WorkSpace, "name"
 
 #Toolbar buttons, relative position = (36, 42)
 toolbar_btn_cut = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_cut", "type": "csStateButton", "visible": 1}
+workspace_ScrollArea_QScrollArea = {"container": mainWindow_workspace_WorkSpace, "name": "ScrollArea", "type": "QScrollArea", "visible": 1}
+scrollArea_toolbar_btn_cut_GroupButton = {"container": workspace_ScrollArea_QScrollArea, "name": "toolbar.btn_cut", "type": "GroupButton", "visible": 1}
+scrollArea_toolbar_btn_freecut_GroupButton = {"container": workspace_ScrollArea_QScrollArea, "name": "toolbar.btn_freecut", "type": "GroupButton", "visible": 1}
+
 toolbar_btn_scan_area = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_scan_area", "type": "csStateButton", "visible": 1}
 toolbar_btn_intraoral = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_intraoral", "type": "csStateButton", "visible": 1}
 toolbar_btn_impression_brush = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_impression_brush", "type": "csStateButton", "visible": 1}
@@ -261,5 +265,3 @@ open_StyleButton = {"checkable": False, "container": o_OpenPage, "id": "btnOpen"
 o_BackgroundDialog = {"type": "BackgroundDialog", "unnamed": 1, "visible": 1}
 btn_not_show_again_QPushButton = {"name": "btn_not_show_again_", "type": "QPushButton", "visible": 1, "window": o_BackgroundDialog}
 btn_ok_QPushButton = {"name": "btn_ok_", "type": "QPushButton", "visible": 1, "window": o_BackgroundDialog}
-
-

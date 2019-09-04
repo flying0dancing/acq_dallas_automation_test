@@ -77,7 +77,7 @@ def scanViewButtonsCheck():
     mouseClick(waitForObject(names.scan_StyleLabel))
     
         
-    test.verify(waitForObject(names.toolbar_btn_cut).visible == True, "Cut button should be visible.")
+    test.verify(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")
     test.verify(waitForObject(names.toolbar_btn_scan_area).visible == True, "Scan area button should be visible.")
     #test.verify(waitForObject(names.toolbar_btn_intraoral).visible == True, "Intraoral button should be visible.")
     test.verify(waitForObject(names.toolbar_btn_lock).visible == True, "Lock button should be visible.")
@@ -130,7 +130,7 @@ def importData(filename, type, flag):
 def checkButtonState(type):
            
     if type == "orth":
-        test.verify(waitForObject(names.toolbar_btn_cut).visible == True, "Cut button should be visible.")
+        test.verify(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_scan_area).visible == True, "Scan area button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_intraoral).visible == True, "Intraoral button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_lock).visible == True, "Lock button should be visible.")
@@ -138,14 +138,15 @@ def checkButtonState(type):
         test.verify(waitForObject(names.toolbar_btn_scan_history).visible == True, "Scan history button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_delete_all).visible == True, "Delete button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_measurement).visible == True, "Measurement button should be visible.")
-        mouseClick(waitForImage("..\\..\\..\\images\\scrollUpButton.png"))
+#        if object.exists("..\\..\\..\\images\\scrollUpButton.png"):
+#            mouseClick(waitForImage("..\\..\\..\\images\\scrollUpButton.png"))
         snooze(2)
         test.verify(waitForObject(names.toolbar_btn_parallelism_check).visible == True, "Parallelism button should be visible.")
         test.verify(waitForObject(names.workflow_bar_btn_common).checked == True, "Common scan should be selected.")
         test.log("Verify buttons for Orth data.")
     elif type == "restore":
         test.verify(waitForObject(names.workflow_bar_btn_common).checked == False, "Common scan should be deselected.")
-        test.verify(waitForObject(names.toolbar_btn_cut).visible == True, "Cut button should be visible.")
+        test.verify(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_freeze).visible == True, "Freeze button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_scan_history).visible == True, "Scan history button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_delete_all).visible == True, "Delete button should be visible.")
@@ -162,7 +163,7 @@ def checkButtonState(type):
             test.verify(waitForObject(names.workflow_bar_btn_impression).checked == True, "The impression button should be selected.")
             test.log("Verify buttons for impression data.")
     elif type == "implant":
-        test.verify(waitForObject(names.toolbar_btn_cut).visible == True, "Cut button should be visible.")
+        test.verify(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_freeze).visible == True, "Freeze button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_scanbody_area).visible == True, "Scanbody area button should be visible")
         test.verify(waitForObject(names.toolbar_btn_scan_history).visible == True, "Scan history button should be visible.")
@@ -182,7 +183,7 @@ def cutOnUpperJaw():
     mouseClick(waitForObject(names.catalog_bar_btn_upper), 56, 25, Qt.NoModifier, Qt.LeftButton)
     snooze(2)
     #mouseClick(waitForImage("..\\..\\..\\images\\cutButton.png"))
-    mouseClick(waitForObject(names.toolbar_btn_cut), 36, 42, Qt.NoModifier, Qt.LeftButton)
+    mouseClick(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton), 36, 42, Qt.NoModifier, Qt.LeftButton)
     
     snooze(2)
     
@@ -210,7 +211,7 @@ def cutOnLowerJaw():
     
     mouseClick(waitForObject(names.catalog_bar_btn_lower), 50, 41, Qt.NoModifier, Qt.LeftButton)
     snooze(2)
-    mouseClick(waitForObject(names.toolbar_btn_cut), 36, 42, Qt.NoModifier, Qt.LeftButton)
+    mouseClick(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton), 36, 42, Qt.NoModifier, Qt.LeftButton)
     snooze(2)
     
     mouseClick(pointTopLeft, Qt.NoModifier, Qt.LeftButton)
@@ -252,11 +253,11 @@ def refineMesh(resolution):
     clickButton(waitForObject(names.refine_view_button_frame_button_refine_DelayButton))
     
     try:
-        waitForObject(names.toolbar_btn_freecut, 600000)
+        waitForObject(names.scrollArea_toolbar_btn_freecut_GroupButton, 600000)
         snooze(2)
     except LookupError:
         test.log("The wait time isn't long enough")
-    test.compare(waitForObjectExists(names.toolbar_btn_freecut).visible, True)
+    test.compare(waitForObjectExists(names.scrollArea_toolbar_btn_freecut_GroupButton).visible, True)
     test.compare(waitForObject(names.toolbar_btn_scan_area).visible, True)
     test.compare(waitForObject(names.toolbar_btn_intraoral).visible, True)
     snooze(2)
@@ -265,7 +266,7 @@ def refineMesh(resolution):
 #Check buttons after refinement
 def checkAfterRefine(type):
     try:
-        test.verify(waitForObject(names.toolbar_btn_freecut).visible == True, "Cut button should be visible.")
+        test.verify(waitForObject(names.scrollArea_toolbar_btn_freecut_GroupButton).visible == True, "Cut button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_scan_area).visible == True, "Scan area button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_intraoral).visible == True, "Intraoral button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_quadrant_snapshot).visible == True, "Quadrant button should be visible.")
@@ -276,7 +277,7 @@ def checkAfterRefine(type):
         
         test.verify(waitForObject(names.workflow_bar_btn_common).checked == True, "Common scan should be selected.")
         if type == "orth":
-            mouseClick(waitForImage("..\\..\\..\\images\\scrollUpButton.png"))
+            #mouseClick(waitForImage("..\\..\\..\\images\\scrollUpButton.png"))
             snooze(2)
             test.verify(waitForObject(names.toolbar_btn_margin_line).visible == True, "Margin line button should be visible.")
             test.verify(waitForObject(names.toolbar_btn_undercut).visible == True, "Under cut button should be visible.")
@@ -286,7 +287,7 @@ def checkAfterRefine(type):
             if object.exists(names.workflow_bar_btn_postscan):
                 test.verify(waitForObject(names.workflow_bar_btn_postscan).checked == False, "The post scan button should be visible and unchecked.")
                 mouseClick(names.workflow_bar_btn_postscan, 36, 42, Qt.NoModifier, Qt.LeftButton)
-                mouseClick(waitForImage("..\\..\\..\\images\\scrollUpButton.png"))
+                #mouseClick(waitForImage("..\\..\\..\\images\\scrollUpButton.png"))
                 snooze(2)
                 test.verify(waitForObject(names.toolbar_btn_preparation_check).visible == True, "Preparation button should be visible.")
                 test.verify(waitForObject(names.toolbar_btn_margin_line).visible == True, "Margin line button should be visible.")
@@ -295,14 +296,14 @@ def checkAfterRefine(type):
                 test.verify(waitForObject(names.toolbar_btn_dual_view).visible == True, "Dual view button should be visible.")
                 test.log("Verify buttons for postscan data.")
             else:
-                mouseClick(waitForImage("..\\..\\..\\images\\scrollUpButton.png"))
+                #mouseClick(waitForImage("..\\..\\..\\images\\scrollUpButton.png"))
                 snooze(2)
                 test.verify(waitForObject(names.toolbar_btn_margin_line).visible == True, "Margin line button should be visible.")
                 test.verify(waitForObject(names.toolbar_btn_undercut).visible == True, "Under cut button should be visible.")
                 test.verify(waitForObject(names.toolbar_btn_parallelism_check).visible == True, "Parallelism button should be visible.")
                 test.log("Verify buttons for impression data.")
         elif type == "implant": 
-            mouseClick(waitForImage("..\\..\\..\\images\\scrollUpButton.png"))
+            #mouseClick(waitForImage("..\\..\\..\\images\\scrollUpButton.png"))
             snooze(2)
             test.verify(waitForObject(names.toolbar_btn_margin_line).visible == True, "Margin line button should be visible.")
             test.verify(waitForObject(names.toolbar_btn_undercut).visible == True, "Under cut button should be visible.")
@@ -341,7 +342,7 @@ def refineMeshWithShade(resolution):
         snooze(2)
     except LookupError:
         test.log("The wait time isn't long enough")
-    test.compare(waitForObjectExists(names.toolbar_btn_freecut).visible, True)
+    test.compare(waitForObjectExists(names.scrollArea_toolbar_btn_freecut_GroupButton).visible, True)
     test.compare(waitForObject(names.toolbar_btn_scan_area).visible, True)
     test.compare(waitForObject(names.toolbar_btn_intraoral).visible, True)
     snooze(2)
@@ -539,7 +540,7 @@ def setDirectory(directory):
     snooze(4)
     mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\shareButton.png"))
     snooze(2)
-    mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\checkButton.png"))
+    mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\checkButton2.png"))
     snooze(2)
 
 def countFolder(path):
