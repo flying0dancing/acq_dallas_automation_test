@@ -4,7 +4,7 @@ APPNAME = "cs_scanflow C:\\ProgramData\\TW\\AcqAltair\\InputData.xml"
 
 def main():
     source(findFile("scripts", "common.py"))
-    
+    #setDirectory(r"D:\\data\\Export")
     export_STL_PLY("D:\\data\\Orthodontics.cszx", "orth", "D:\\data\\Export")
     export_STL_PLY("D:\\data\\Restore_Postscan.cszx", "restore", "D:\\data\\Export")
     export_STL_PLY("D:\\data\\Implant.cszx", "implant", "D:\\data\\Export")
