@@ -553,11 +553,10 @@ def countFolder(path):
 #Export to stl or ply format
 def exportFile(format, type, path):
     mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\exportButton.png"))
-    snooze(2)
-    mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\saveButton.png"))
-    snooze(2)
+    snooze(3)
+    mouseClick(findImage("D:\\Eva\\acq_dallas_automation_test\\images\\saveButton.png"))   
     #Export format drop down list
-    mouseClick(waitForObject(names.o_Image), 5, 11, Qt.LeftButton)
+    mouseClick(waitForObject(names.cbExportFormat_StyleComboBox), 5, 11, Qt.LeftButton)
     snooze(2)
     if "PLY" == format:
         mouseClick(waitForObject(names.o_ItemDelegate), 262, 42, Qt.LeftButton)
@@ -566,7 +565,7 @@ def exportFile(format, type, path):
     snooze(2)
     
     #ClinicalIndication drop down list
-    mouseClick(waitForObject(names.cbExportClinicalIndication_ComboBox), 451, 41, Qt.LeftButton)
+    mouseClick(waitForObject(names.cbExportClinicalIndication_StyleComboBox), 451, 41, Qt.LeftButton)
     snooze(2)
     if "orth" == type:
         mouseClick(waitForObject(names.o_ItemDelegate), 151, 40, Qt.LeftButton)
@@ -580,8 +579,9 @@ def exportFile(format, type, path):
     snooze(7)
     laterFolder = countFolder(path)
     test.verify(laterFolder == previousFolders + 1, "The folder count should be added 1.")
-    mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\shareButton.png"))
-    snooze(2)
+    snooze(5)
+    mouseClick(findImage("D:\\Eva\\acq_dallas_automation_test\\images\\shareButton.png"))
+    snooze(1)
     mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\checkButton2.png"))
     snooze(2)
 

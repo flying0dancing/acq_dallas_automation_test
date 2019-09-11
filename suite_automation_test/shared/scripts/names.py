@@ -236,6 +236,7 @@ btnBrowseExportPath_StyleButton = {"checkable": False, "container": o_ExportPage
 #Drop down list for export format
 o_Image = {"container": o_ExportPage_2, "source": "qrc:///image/general/general_combobox_down_dark.svg", "type": "Image", "unnamed": 1, "visible": True}
 o_Overlay = {"container": workspace_QtQuickWidget, "type": "Overlay", "unnamed": 1, "visible": True}
+cbExportFormat_StyleComboBox = {"container": o_ExportPage_2, "id": "cbExportFormat", "type": "StyleComboBox", "unnamed": 1, "visible": True}
 
 #The first selection for a drop down overlay
 o_ItemDelegate = {"checkable": False, "container": o_Overlay, "type": "ItemDelegate", "unnamed": 1, "visible": True}
@@ -245,7 +246,8 @@ o_ItemDelegate_2 = {"checkable": False, "container": o_Overlay, "occurrence": 2,
 o_ItemDelegate_3 = {"checkable": False, "container": o_Overlay, "occurrence": 3, "type": "ItemDelegate", "unnamed": 1, "visible": True}
 
 #Drop down list for clinical indication type
-cbExportClinicalIndication_ComboBox = {"container": o_ExportPage_2, "id": "cbExportClinicalIndication", "type": "ComboBox", "unnamed": 1, "visible": True}
+#cbExportClinicalIndication_ComboBox = {"container": o_ExportPage_2, "id": "cbExportClinicalIndication", "type": "ComboBox", "unnamed": 1, "visible": True}
+cbExportClinicalIndication_StyleComboBox = {"container": o_ExportPage_2, "id": "cbExportClinicalIndication", "type": "StyleComboBox", "unnamed": 1, "visible": True}
 
 cancel_Text = {"container": o_ExportPage_2, "text": "Cancel", "type": "Text", "unnamed": 1, "visible": True}
 save_Text = {"container": workspace_QtQuickWidget, "occurrence": 2, "text": "Save", "type": "Text", "unnamed": 1, "visible": True}
