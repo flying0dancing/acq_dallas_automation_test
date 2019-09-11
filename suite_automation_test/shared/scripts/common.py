@@ -554,7 +554,8 @@ def countFolder(path):
 def exportFile(format, type, path):
     mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\exportButton.png"))
     snooze(3)
-    mouseClick(findImage("D:\\Eva\\acq_dallas_automation_test\\images\\saveButton.png"))   
+    mouseClick(findImage("D:\\Eva\\acq_dallas_automation_test\\images\\saveButton.png"))
+    snooze(2)   
     #Export format drop down list
     mouseClick(waitForObject(names.cbExportFormat_StyleComboBox), 5, 11, Qt.LeftButton)
     snooze(2)
