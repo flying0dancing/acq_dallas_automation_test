@@ -197,9 +197,12 @@ workspace_85_QPushButton = {"container": mainWindow_workspace_WorkSpace, "name":
 #Toolbar buttons under Adapt menu
 toolbar_btn_mesh_cleaning = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_mesh_cleaning", "type": "csStateButton", "visible": 1}
 toolbar_btn_mesh_closure = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_mesh_closure", "type": "csStateButton", "visible": 1}
-toolbar_btn_bracket_removal = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_bracket_removal", "type": "csStateButton", "visible": 1}
+#toolbar_btn_bracket_removal = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_bracket_removal", "type": "csStateButton", "visible": 1}
 toolbar_btn_plane_cut = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_plane_cut", "type": "csStateButton", "visible": 1}
 workspace_QtQuickWidget = {"container": mainWindow_workspace_WorkSpace, "type": "QtQuickWidget", "unnamed": 1, "visible": 1}
+#workspace_VTKMeshWidget = {"container": mainWindow_workspace_WorkSpace, "type": "VTKMeshWidget", "unnamed": 1, "visible": 1}
+scrollArea_toolbar_btn_cut_GroupButton = {"container": workspace_ScrollArea_QScrollArea, "name": "toolbar.btn_cut", "type": "GroupButton", "visible": 1}
+
 
 #Sliders under mesh cleaning tools
 slider_radius_Slider = {"container": workspace_QtQuickWidget, "id": "slider_radius", "type": "Slider", "unnamed": 1, "visible": True}
