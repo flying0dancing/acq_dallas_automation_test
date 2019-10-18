@@ -22,9 +22,13 @@ generalMsgBox_btn_frame_QFrame = {"name": "btn_frame_", "type": "QFrame", "visib
 btn_frame_btn_box_CsdDialogButtonBox = {"container": generalMsgBox_btn_frame_QFrame, "name": "btn_box_", "type": "CsdDialogButtonBox", "visible": 1}
 
 #Buttons on message box
+o_MessageDialog = {"type": "MessageDialog", "unnamed": 1, "visible": 1}
+o_QtQuickWidget = {"type": "QtQuickWidget", "unnamed": 1, "visible": 1, "window": o_MessageDialog}
 btn_box_OK_QPushButton = {"container": btn_frame_btn_box_CsdDialogButtonBox, "text": "OK", "type": "QPushButton", "unnamed": 1, "visible": 1}
 btn_box_Yes_QPushButton = {"container": btn_frame_btn_box_CsdDialogButtonBox, "text": "Yes", "type": "QPushButton", "unnamed": 1, "visible": 1}
 btn_box_No_QPushButton = {"container": btn_frame_btn_box_CsdDialogButtonBox, "text": "No", "type": "QPushButton", "unnamed": 1, "visible": 1}
+oK_StyleButton = {"checkable": True, "container": o_QtQuickWidget, "text": "OK", "type": "StyleButton", "unnamed": 1, "visible": True}
+
 
 #BallonInfoLabel
 workspace_BalloonInfoBar_BalloonInfoBar = {"container": mainWindow_workspace_WorkSpace, "name": "BalloonInfoBar", "type": "BalloonInfoBar", "visible": 1}
@@ -270,3 +274,4 @@ open_StyleButton = {"checkable": False, "container": o_OpenPage, "id": "btnOpen"
 o_BackgroundDialog = {"type": "BackgroundDialog", "unnamed": 1, "visible": 1}
 btn_not_show_again_QPushButton = {"name": "btn_not_show_again_", "type": "QPushButton", "visible": 1, "window": o_BackgroundDialog}
 btn_ok_QPushButton = {"name": "btn_ok_", "type": "QPushButton", "visible": 1, "window": o_BackgroundDialog}
+

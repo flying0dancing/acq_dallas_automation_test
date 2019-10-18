@@ -5,6 +5,6 @@ def main():
     startApplication(APPNAME)
     
     #Click ok button on the warn message which says it's an internal version
-    clickButton(waitForObject(names.btn_box_OK_QPushButton))
+    mouseClick(waitForObject(names.oK_StyleButton), 153, 30, Qt.LeftButton)
     
     scanViewButtonsCheck()

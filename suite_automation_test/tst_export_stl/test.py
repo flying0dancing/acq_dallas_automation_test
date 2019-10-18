@@ -13,7 +13,8 @@ def main():
 def export_STL_PLY(file, type, path):
     snooze(3)
     startApplication(APPNAME)
-    clickButton(waitForObject(names.btn_box_OK_QPushButton)) 
+    #clickButton(waitForObject(names.oK_StyleButton)) 
+    mouseClick(waitForObject(names.oK_StyleButton), 153, 30, Qt.LeftButton)
     #Import data
     importData(file, type, "normal")
     #Perform refinement
