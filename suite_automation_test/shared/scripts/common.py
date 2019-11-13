@@ -145,7 +145,7 @@ def checkButtonState(type):
         test.verify(waitForObject(names.workflow_bar_btn_common).checked == True, "Common scan should be selected.")
         test.log("Verify buttons for Orth data.")
     elif type == "restore":
-        test.verify(waitForObject(names.workflow_bar_btn_common).checked == False, "Common scan should be deselected.")
+        #test.verify(waitForObject(names.workflow_bar_btn_common).checked == False, "Common scan should be deselected.")
         test.verify(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_freeze).visible == True, "Freeze button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_scan_history).visible == True, "Scan history button should be visible.")
@@ -153,6 +153,7 @@ def checkButtonState(type):
         
         
         if object.exists(names.workflow_bar_btn_postscan):
+            test.verify(waitForObject(names.workflow_bar_btn_common).checked == False, "Common scan should be deselected.")
             test.verify(waitForObject(names.workflow_bar_btn_postscan).checked == True, "The post scan button should be selected.")
             test.verify(waitForObject(names.toolbar_btn_intraoral).visible == True, "Intraoral button should be visible.")
             test.verify(waitForObject(names.toolbar_btn_lock).visible == True, "Lock button should be visible.")
@@ -160,7 +161,8 @@ def checkButtonState(type):
             test.verify(waitForObject(names.toolbar_btn_parallelism_check).visible == True, "Parallelism button should be visible.")
             test.log("Verify buttons for postscan data.")
         else:
-            test.verify(waitForObject(names.workflow_bar_btn_impression).checked == True, "The impression button should be selected.")
+            #test.verify(waitForObject(names.workflow_bar_btn_impression).checked == True, "The impression button should be selected.")
+            test.verify(waitForObject(names.workflow_bar_btn_common).checked == True, "Common scan should be selected.")
             test.log("Verify buttons for impression data.")
     elif type == "implant":
         test.verify(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")
@@ -305,14 +307,14 @@ def checkAfterRefine(type):
         elif type == "implant": 
             #mouseClick(waitForImage("..\\..\\..\\images\\scrollUpButton.png"))
             snooze(2)
-            test.verify(waitForObject(names.toolbar_btn_margin_line).visible == True, "Margin line button should be visible.")
+            #test.verify(waitForObject(names.toolbar_btn_margin_line).visible == True, "Margin line button should be visible.")
             test.verify(waitForObject(names.toolbar_btn_undercut).visible == True, "Under cut button should be visible.")
             test.verify(waitForObject(names.toolbar_btn_parallelism_check).visible == True, "Parallelism button should be visible.")
             test.verify(waitForObject(names.workflow_bar_btn_implant).visible == True, "Implant button should be visible after refinement.")       
             test.verify(waitForObject(names.workflow_bar_btn_implant).checked == False, "Implant button should be shown and unchecked.")
             test.log("Verify buttons for implant data.")
-    except LookupError:
-        test.log("Fail to find object")
+    except LookupError as e:
+        test.log("Fail to find object: %s" % str(e))
         
 #Refinement with shade matching info
 def refineMeshWithShade(resolution):
@@ -580,10 +582,11 @@ def exportFile(format, type, path):
     snooze(7)
     laterFolder = countFolder(path)
     test.verify(laterFolder == previousFolders + 1, "The folder count should be added 1.")
-    snooze(5)
+    while object.exists(names.save_DICOM_File_StyleLabel):
+        snooze(5)
     mouseClick(findImage("D:\\Eva\\acq_dallas_automation_test\\images\\shareButton.png"))
     snooze(1)
-    mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\checkButton2.png"))
+    mouseClick(waitForImage(r"D:\Eva\acq_dallas_automation_test\images\checkButton2.png"))
     snooze(2)
 
 #Open with 3rd party software

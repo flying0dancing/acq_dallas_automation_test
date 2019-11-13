@@ -88,11 +88,13 @@ toolbar_toolbar_scan_body_area_selection = {"container": mainWindow_workspace_Wo
 toolbar_btn_quadrant_snapshot = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_quadrant_snapshot", "type": "csStateButton", "visible": 1}
 toolbar_btn_transparency = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_transparency", "type": "csStateButton", "visible": 1}
 toolbar_btn_measurement = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_measurement", "type": "csStateButton", "visible": 1}
-toolbar_btn_orientation_adjustment = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_orientation_adjustment", "type": "csStateButton", "visible": 1}
+#toolbar_btn_orientation_adjustment = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_orientation_adjustment", "type": "csStateButton", "visible": 1}
+toolbar_btn_orientation_adjustment = {"container": workspace_ScrollArea_QScrollArea, "name": "toolbar.btn_orientation_adjustment", "type": "GroupButton", "visible": 1}
 toolbar_btn_occlusion_pressure = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_occlusion_pressure", "type": "csStateButton", "visible": 1}
 toolbar_btn_restoration = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_restoration", "type": "csStateButton", "visible": 1}
 toolbar_btn_shade_matching = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_shade_matching", "type": "csStateButton", "visible": 1}
 toolbar_btn_manual_bite_adjustment = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_manual_bite_adjustment", "type": "csStateButton", "visible": 1}
+
 
 #Toolbar buttons under cut in scan view
 
@@ -130,7 +132,8 @@ progress_view_button_cancel_progress = {"container": workspace_progress_view_but
 
 #Buttons under restoration tool
 toolbar_btn_preparation_check = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_preparation_check", "type": "csStateButton", "visible": 1}
-toolbar_btn_margin_line = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_margin_line", "type": "csStateButton", "visible": 1}
+#toolbar_btn_margin_line = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_margin_line", "type": "csStateButton", "visible": 1}
+toolbar_btn_margin_line = {"container": workspace_ScrollArea_QScrollArea, "name": "toolbar.btn_margin_line", "type": "GroupButton", "visible": 1}
 toolbar_btn_undercut = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_undercut", "type": "csStateButton", "visible": 1}
 #parallelism button on scan view
 toolbar_btn_parallelism_check = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_parallelism_check", "type": "csStateButton", "visible": 1}
@@ -275,3 +278,4 @@ o_BackgroundDialog = {"type": "BackgroundDialog", "unnamed": 1, "visible": 1}
 btn_not_show_again_QPushButton = {"name": "btn_not_show_again_", "type": "QPushButton", "visible": 1, "window": o_BackgroundDialog}
 btn_ok_QPushButton = {"name": "btn_ok_", "type": "QPushButton", "visible": 1, "window": o_BackgroundDialog}
 
+save_DICOM_File_StyleLabel = {"container": mainWindow_BusyDialog, "text": "Save DICOM File", "type": "StyleLabel", "unnamed": 1, "visible": True}
