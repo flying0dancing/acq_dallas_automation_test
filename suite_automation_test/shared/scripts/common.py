@@ -519,7 +519,7 @@ def exportToDCM():
     snooze(1)
     mouseClick(waitForImage("..\\..\\..\\images\\saveButton.png"))
     snooze(1)
-    mouseClick(waitForObject(names.save_Text))
+    mouseClick(waitForObject(names.save_StyleButton), 70, 17, Qt.LeftButton)
     snooze(1)
     test.log("Export data to DCM.")
 
@@ -559,7 +559,7 @@ def exportFile(format, type, path):
     mouseClick(findImage("D:\\Eva\\acq_dallas_automation_test\\images\\saveButton.png"))
     snooze(2)   
     #Export format drop down list
-    mouseClick(waitForObject(names.cbExportFormat_StyleComboBox), 5, 11, Qt.LeftButton)
+    mouseClick(waitForObject(names.scrollView_cbExportFormat_StyleComboBox), 381, 28, Qt.LeftButton)
     snooze(2)
     if "PLY" == format:
         mouseClick(waitForObject(names.o_ItemDelegate), 262, 42, Qt.LeftButton)
@@ -568,17 +568,18 @@ def exportFile(format, type, path):
     snooze(2)
     
     #ClinicalIndication drop down list
-    mouseClick(waitForObject(names.cbExportClinicalIndication_StyleComboBox), 451, 41, Qt.LeftButton)
+    #mouseClick(waitForObject(names.cbExportClinicalIndication_StyleComboBox), 451, 41, Qt.LeftButton)
     snooze(2)
     if "orth" == type:
-        mouseClick(waitForObject(names.o_ItemDelegate), 151, 40, Qt.LeftButton)
+        #mouseClick(waitForObject(names.o_ItemDelegate), 151, 40, Qt.LeftButton)
+        mouseClick(waitForObject(names.scrollView_Orthodontics_StyleRadioButton), 123, 21, Qt.LeftButton)
     elif "restore" == type:
-        mouseClick(waitForObject(names.o_ItemDelegate_2), 275, 24, Qt.LeftButton)
+        mouseClick(waitForObject(names.scrollView_Restoration_StyleRadioButton), 127, 32, Qt.LeftButton)
     elif "implant" == type:
-        mouseClick(waitForObject(names.o_ItemDelegate_3), 91, 43, Qt.LeftButton)
+        mouseClick(waitForObject(names.scrollView_Implant_StyleRadioButton), 81, 18, Qt.LeftButton)
     snooze(2)
     previousFolders = countFolder(path)
-    mouseClick(waitForObject(names.save_Text))
+    mouseClick(waitForObject(names.save_StyleButton), 70, 17, Qt.LeftButton)
     snooze(7)
     laterFolder = countFolder(path)
     test.verify(laterFolder == previousFolders + 1, "The folder count should be added 1.")

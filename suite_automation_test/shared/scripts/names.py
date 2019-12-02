@@ -12,7 +12,7 @@ continue_without_signing_in_Text = {"container": mainWindow_UserLoginDialog, "te
 mainWindow_button_menu_csButton = {"name": "button_menu", "type": "csButton", "visible": 1, "window": mainWindow_MainWindow}
 mainMenu_MainMenu = {"name": "MainMenu", "type": "MainMenu", "visible": 1}
 mainMenu_Export_csButton = {"container": mainMenu_MainMenu, "text": "Export", "type": "csButton", "unnamed": 1, "visible": 1}
-mainMenu_Export_Raw_Data_csButton = {"container": mainMenu_MainMenu, "text": "    Export Scan Data", "type": "csButton", "unnamed": 1, "visible": 1}
+mainMenu_Export_Raw_Data_csButton = {"container": mainMenu_MainMenu, "text": "    Export", "type": "csButton", "unnamed": 1, "visible": 1}
 
 #General message box
 generalMsgBox_GeneralMsgBox = {"name": "GeneralMsgBox", "type": "GeneralMsgBox", "visible": 1}
@@ -279,3 +279,17 @@ btn_not_show_again_QPushButton = {"name": "btn_not_show_again_", "type": "QPushB
 btn_ok_QPushButton = {"name": "btn_ok_", "type": "QPushButton", "visible": 1, "window": o_BackgroundDialog}
 
 save_DICOM_File_StyleLabel = {"container": mainWindow_BusyDialog, "text": "Save DICOM File", "type": "StyleLabel", "unnamed": 1, "visible": True}
+scrollView_ScrollView = {"container": workspace_QtQuickWidget, "id": "scrollView", "type": "ScrollView", "unnamed": 1, "visible": True}
+scrollView_cbExportFormat_StyleComboBox = {"container": scrollView_ScrollView, "id": "cbExportFormat", "type": "StyleComboBox", "unnamed": 1, "visible": True}
+
+scrollView_Orthodontics_StyleRadioButton = {"checkable": True, "container": scrollView_ScrollView, "occurrence": 3, "text": "Orthodontics", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
+scrollView_Restoration_StyleRadioButton = {"checkable": True, "container": scrollView_ScrollView, "occurrence": 3, "text": "Restoration", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
+scrollView_Implant_StyleRadioButton = {"checkable": True, "container": scrollView_ScrollView, "occurrence": 3, "text": "Implant", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
+
+
+save_StyleButton = {"checkable": False, "container": workspace_QtQuickWidget, "id": "id_save_btn", "text": "Save", "type": "StyleButton", "unnamed": 1, "visible": True}
+save_and_Exit_StyleButton = {"checkable": False, "container": workspace_QtQuickWidget, "id": "id_save_and_exit_btn", "text": "Save and Exit", "type": "StyleButton", "unnamed": 1, "visible": True}
+cancel_StyleButton = {"checkable": False, "container": workspace_QtQuickWidget, "id": "id_cancel_btn", "text": "Cancel", "type": "StyleButton", "unnamed": 1, "visible": True}
+
+
+
