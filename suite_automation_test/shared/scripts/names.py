@@ -27,8 +27,8 @@ o_QtQuickWidget = {"type": "QtQuickWidget", "unnamed": 1, "visible": 1, "window"
 btn_box_OK_QPushButton = {"container": btn_frame_btn_box_CsdDialogButtonBox, "text": "OK", "type": "QPushButton", "unnamed": 1, "visible": 1}
 btn_box_Yes_QPushButton = {"container": btn_frame_btn_box_CsdDialogButtonBox, "text": "Yes", "type": "QPushButton", "unnamed": 1, "visible": 1}
 btn_box_No_QPushButton = {"container": btn_frame_btn_box_CsdDialogButtonBox, "text": "No", "type": "QPushButton", "unnamed": 1, "visible": 1}
-oK_StyleButton = {"checkable": True, "container": o_QtQuickWidget, "text": "OK", "type": "StyleButton", "unnamed": 1, "visible": True}
-
+#oK_StyleButton = {"checkable": True, "container": o_QtQuickWidget, "text": "OK", "type": "StyleButton", "unnamed": 1, "visible": True}
+oK_StyleButton = {"checkable": True, "container": o_QtQuickWidget, "text": "OK, got it", "type": "StyleButton", "unnamed": 1, "visible": True}
 
 #BallonInfoLabel
 workspace_BalloonInfoBar_BalloonInfoBar = {"container": mainWindow_workspace_WorkSpace, "name": "BalloonInfoBar", "type": "BalloonInfoBar", "visible": 1}
@@ -291,5 +291,6 @@ save_StyleButton = {"checkable": False, "container": workspace_QtQuickWidget, "i
 save_and_Exit_StyleButton = {"checkable": False, "container": workspace_QtQuickWidget, "id": "id_save_and_exit_btn", "text": "Save and Exit", "type": "StyleButton", "unnamed": 1, "visible": True}
 cancel_StyleButton = {"checkable": False, "container": workspace_QtQuickWidget, "id": "id_cancel_btn", "text": "Cancel", "type": "StyleButton", "unnamed": 1, "visible": True}
 
+#scrollView_Orthodontics_StyleRadioButton = {"checkable": True, "container": scrollView_ScrollView, "text": "Orthodontics", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
 
 

@@ -572,11 +572,11 @@ def exportFile(format, type, path):
     snooze(2)
     if "orth" == type:
         #mouseClick(waitForObject(names.o_ItemDelegate), 151, 40, Qt.LeftButton)
-        mouseClick(waitForObject(names.scrollView_Orthodontics_StyleRadioButton), 123, 21, Qt.LeftButton)
+        mouseClick(waitForObject(names.scrollView_Orthodontics_StyleRadioButton), 83, 21, Qt.LeftButton)
     elif "restore" == type:
-        mouseClick(waitForObject(names.scrollView_Restoration_StyleRadioButton), 127, 32, Qt.LeftButton)
+        mouseClick(waitForObject(names.scrollView_Restoration_StyleRadioButton), 72, 24, Qt.LeftButton)
     elif "implant" == type:
-        mouseClick(waitForObject(names.scrollView_Implant_StyleRadioButton), 81, 18, Qt.LeftButton)
+        mouseClick(waitForObject(names.scrollView_Implant_StyleRadioButton), 63, 22, Qt.LeftButton)
     snooze(2)
     previousFolders = countFolder(path)
     mouseClick(waitForObject(names.save_StyleButton), 70, 17, Qt.LeftButton)
