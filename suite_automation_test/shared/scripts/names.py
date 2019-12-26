@@ -282,9 +282,9 @@ save_DICOM_File_StyleLabel = {"container": mainWindow_BusyDialog, "text": "Save 
 scrollView_ScrollView = {"container": workspace_QtQuickWidget, "id": "scrollView", "type": "ScrollView", "unnamed": 1, "visible": True}
 scrollView_cbExportFormat_StyleComboBox = {"container": scrollView_ScrollView, "id": "cbExportFormat", "type": "StyleComboBox", "unnamed": 1, "visible": True}
 
-scrollView_Orthodontics_StyleRadioButton = {"checkable": True, "container": scrollView_ScrollView, "occurrence": 3, "text": "Orthodontics", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
-scrollView_Restoration_StyleRadioButton = {"checkable": True, "container": scrollView_ScrollView, "occurrence": 3, "text": "Restoration", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
-scrollView_Implant_StyleRadioButton = {"checkable": True, "container": scrollView_ScrollView, "occurrence": 3, "text": "Implant", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
+scrollView_Orthodontics_StyleRadioButton = {"checkable": True, "container": scrollView_ScrollView, "occurrence": 2, "text": "Orthodontics", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
+scrollView_Restoration_StyleRadioButton = {"checkable": True, "container": scrollView_ScrollView, "occurrence": 2, "text": "Restoration", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
+scrollView_Implant_StyleRadioButton = {"checkable": True, "container": scrollView_ScrollView, "occurrence": 2, "text": "Implant", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
 
 
 save_StyleButton = {"checkable": False, "container": workspace_QtQuickWidget, "id": "id_save_btn", "text": "Save", "type": "StyleButton", "unnamed": 1, "visible": True}
