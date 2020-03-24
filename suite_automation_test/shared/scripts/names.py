@@ -25,6 +25,7 @@ btn_frame_btn_box_CsdDialogButtonBox = {"container": generalMsgBox_btn_frame_QFr
 o_MessageDialog = {"type": "MessageDialog", "unnamed": 1, "visible": 1}
 o_QtQuickWidget = {"type": "QtQuickWidget", "unnamed": 1, "visible": 1, "window": o_MessageDialog}
 btn_box_OK_QPushButton = {"container": btn_frame_btn_box_CsdDialogButtonBox, "text": "OK", "type": "QPushButton", "unnamed": 1, "visible": 1}
+
 btn_box_Yes_QPushButton = {"container": btn_frame_btn_box_CsdDialogButtonBox, "text": "Yes", "type": "QPushButton", "unnamed": 1, "visible": 1}
 btn_box_No_QPushButton = {"container": btn_frame_btn_box_CsdDialogButtonBox, "text": "No", "type": "QPushButton", "unnamed": 1, "visible": 1}
 #oK_StyleButton = {"checkable": True, "container": o_QtQuickWidget, "text": "OK", "type": "StyleButton", "unnamed": 1, "visible": True}
@@ -32,7 +33,10 @@ oK_StyleButton = {"checkable": True, "container": o_QtQuickWidget, "text": "OK, 
 
 #BallonInfoLabel
 workspace_BalloonInfoBar_BalloonInfoBar = {"container": mainWindow_workspace_WorkSpace, "name": "BalloonInfoBar", "type": "BalloonInfoBar", "visible": 1}
-balloonInfoBar_InfoLabel_QLabel = {"container": workspace_BalloonInfoBar_BalloonInfoBar, "name": "InfoLabel", "type": "QLabel", "visible": 1}
+#balloonInfoBar_InfoLabel_QLabel = {"container": workspace_BalloonInfoBar_BalloonInfoBar, "name": "InfoLabel", "type": "QLabel", "visible": 1}
+balloonInfoBar_QtQuickWidget = {"container": workspace_BalloonInfoBar_BalloonInfoBar, "type": "QtQuickWidget", "unnamed": 1, "visible": 1}
+balloonInfoBar_InfoLabel_QLabel = {"container": balloonInfoBar_QtQuickWidget, "occurrence": 4, "type": "Rectangle", "unnamed": 1, "visible": True}
+
 
 #Busy dialogue
 mainWindow_BusyDialog = {"type": "BusyDialog", "unnamed": 1, "visible": 1, "window": mainWindow_MainWindow}
@@ -44,11 +48,7 @@ mainWindow_StartupScreen = {"type": "StartupScreen", "unnamed": 1, "visible": 1,
 import_StyleLabel = {"container": mainWindow_StartupScreen, "text": "Import", "type": "StyleLabel", "unnamed": 1, "visible": True}
 scan_StyleLabel = {"container": mainWindow_StartupScreen, "text": "Scan", "type": "StyleLabel", "unnamed": 1, "visible": True}
 
-#Menu bar buttons, currently unavailable
-mainWindow_csScanButton = {"occurrence": 1, "type": "csStateButton", "unnamed": 1, "visible": 1, "window": mainWindow_MainWindow}
-mainWindow_csCheckButton = {"occurrence": 2, "type": "csStateButton", "unnamed": 1, "visible": 1, "window": mainWindow_MainWindow}
-mainWindow_csAdaptButton = {"occurrence": 3, "type": "csStateButton", "unnamed": 1, "visible": 1, "window": mainWindow_MainWindow}
-mainWindow_csExportButton = {"occurrence": 4, "type": "csStateButton", "unnamed": 1, "visible": 1, "window": mainWindow_MainWindow}
+
 
 #Catalog buttons
 catalog_bar_btn_upper = {"container": mainWindow_workspace_WorkSpace, "name": "catalog_bar.btn_upper", "type": "csStateButton", "visible": 1}
@@ -255,9 +255,6 @@ o_ItemDelegate_2 = {"checkable": False, "container": o_Overlay, "occurrence": 2,
 #The third selection for a drop down overlay
 o_ItemDelegate_3 = {"checkable": False, "container": o_Overlay, "occurrence": 3, "type": "ItemDelegate", "unnamed": 1, "visible": True}
 
-#Drop down list for clinical indication type
-#cbExportClinicalIndication_ComboBox = {"container": o_ExportPage_2, "id": "cbExportClinicalIndication", "type": "ComboBox", "unnamed": 1, "visible": True}
-cbExportClinicalIndication_StyleComboBox = {"container": o_ExportPage_2, "id": "cbExportClinicalIndication", "type": "StyleComboBox", "unnamed": 1, "visible": True}
 
 cancel_Text = {"container": o_ExportPage_2, "text": "Cancel", "type": "Text", "unnamed": 1, "visible": True}
 save_Text = {"container": workspace_QtQuickWidget, "occurrence": 2, "text": "Save", "type": "Text", "unnamed": 1, "visible": True}
@@ -282,15 +279,20 @@ save_DICOM_File_StyleLabel = {"container": mainWindow_BusyDialog, "text": "Save 
 scrollView_ScrollView = {"container": workspace_QtQuickWidget, "id": "scrollView", "type": "ScrollView", "unnamed": 1, "visible": True}
 scrollView_cbExportFormat_StyleComboBox = {"container": scrollView_ScrollView, "id": "cbExportFormat", "type": "StyleComboBox", "unnamed": 1, "visible": True}
 
-scrollView_Orthodontics_StyleRadioButton = {"checkable": True, "container": scrollView_ScrollView, "occurrence": 2, "text": "Orthodontics", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
-scrollView_Restoration_StyleRadioButton = {"checkable": True, "container": scrollView_ScrollView, "occurrence": 2, "text": "Restoration", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
-scrollView_Implant_StyleRadioButton = {"checkable": True, "container": scrollView_ScrollView, "occurrence": 2, "text": "Implant", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
-
-
 save_StyleButton = {"checkable": False, "container": workspace_QtQuickWidget, "id": "id_save_btn", "text": "Save", "type": "StyleButton", "unnamed": 1, "visible": True}
 save_and_Exit_StyleButton = {"checkable": False, "container": workspace_QtQuickWidget, "id": "id_save_and_exit_btn", "text": "Save and Exit", "type": "StyleButton", "unnamed": 1, "visible": True}
 cancel_StyleButton = {"checkable": False, "container": workspace_QtQuickWidget, "id": "id_cancel_btn", "text": "Cancel", "type": "StyleButton", "unnamed": 1, "visible": True}
 
-#scrollView_Orthodontics_StyleRadioButton = {"checkable": True, "container": scrollView_ScrollView, "text": "Orthodontics", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
+content_page_SwipeView = {"container": workspace_QtQuickWidget, "id": "content_page", "type": "SwipeView", "unnamed": 1, "visible": True}
+content_page_Rectangle = {"container": content_page_SwipeView, "occurrence": 34, "type": "Rectangle", "unnamed": 1, "visible": True}
+content_page_Rectangle_2 = {"container": content_page_SwipeView, "occurrence": 36, "type": "Rectangle", "unnamed": 1, "visible": True}
+content_page_Rectangle_3 = {"container": content_page_SwipeView, "occurrence": 38, "type": "Rectangle", "unnamed": 1, "visible": True}
+
+content_page_Orthodontics_StyleRadioButton = {"checkable": True, "container": content_page_SwipeView, "occurrence": 3, "text": "Orthodontics", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
+content_page_Restoration_StyleRadioButton = {"checkable": True, "container": content_page_SwipeView, "occurrence": 3, "text": "Restoration", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
+content_page_Implant_StyleRadioButton = {"checkable": True, "container": content_page_SwipeView, "occurrence": 3, "text": "Implant", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
+
+
+
 
 

@@ -161,8 +161,8 @@ def checkButtonState(type):
             test.verify(waitForObject(names.toolbar_btn_parallelism_check).visible == True, "Parallelism button should be visible.")
             test.log("Verify buttons for postscan data.")
         else:
-            #test.verify(waitForObject(names.workflow_bar_btn_impression).checked == True, "The impression button should be selected.")
-            test.verify(waitForObject(names.workflow_bar_btn_common).checked == True, "Common scan should be selected.")
+            test.verify(waitForObject(names.workflow_bar_btn_impression).checked == True, "The impression button should be selected.")
+            test.verify(waitForObject(names.workflow_bar_btn_common).checked == False, "Common scan should be deselected.")
             test.log("Verify buttons for impression data.")
     elif type == "implant":
         test.verify(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")
@@ -559,7 +559,9 @@ def exportFile(format, type, path):
     mouseClick(findImage("D:\\Eva\\acq_dallas_automation_test\\images\\saveButton.png"))
     snooze(2)   
     #Export format drop down list
-    mouseClick(waitForObject(names.scrollView_cbExportFormat_StyleComboBox), 381, 28, Qt.LeftButton)
+    #mouseClick(waitForObject(names.cbExportFormat_StyleComboBox), 381, 28, Qt.LeftButton)
+    mouseClick(waitForObject(names.o_Image), 15, 7, Qt.LeftButton)
+    
     snooze(2)
     if "PLY" == format:
         mouseClick(waitForObject(names.o_ItemDelegate), 262, 42, Qt.LeftButton)
@@ -571,12 +573,13 @@ def exportFile(format, type, path):
     #mouseClick(waitForObject(names.cbExportClinicalIndication_StyleComboBox), 451, 41, Qt.LeftButton)
     snooze(2)
     if "orth" == type:
-        #mouseClick(waitForObject(names.o_ItemDelegate), 151, 40, Qt.LeftButton)
-        mouseClick(waitForObject(names.scrollView_Orthodontics_StyleRadioButton), 83, 21, Qt.LeftButton)
+        #mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\OrthType.png")) 
+        mouseClick(waitForObject(names.content_page_Orthodontics_StyleRadioButton), 83, 21, Qt.LeftButton)
     elif "restore" == type:
-        mouseClick(waitForObject(names.scrollView_Restoration_StyleRadioButton), 72, 24, Qt.LeftButton)
+        #mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\RestoreType.png")) 
+        mouseClick(waitForObject(names.content_page_Restoration_StyleRadioButton), 83, 21, Qt.LeftButton)
     elif "implant" == type:
-        mouseClick(waitForObject(names.scrollView_Implant_StyleRadioButton), 63, 22, Qt.LeftButton)
+        mouseClick(waitForObject(names.content_page_Implant_StyleRadioButton), 83, 21, Qt.LeftButton)
     snooze(2)
     previousFolders = countFolder(path)
     mouseClick(waitForObject(names.save_StyleButton), 70, 17, Qt.LeftButton)
