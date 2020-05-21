@@ -118,8 +118,10 @@ def importData(filename, type, flag):
             test.log("The ok doesn't show up.")
     elif "normal" == flag:
         try:
-            waitForObject(names.balloonInfoBar_InfoLabel_QLabel, 600000)
-            snooze(2)
+            while object.exists(names.import_Scan_Data_StyleLabel):
+                snooze(3)
+            #waitForObject(names.balloonInfoBar_InfoLabel_QLabel, 600000)
+            #snooze(2)
         except LookupError:
             test.log("The balloon info bar doesn't show up.")
     test.log("Import data with name: %s" % filename)
@@ -254,11 +256,10 @@ def refineMesh(resolution):
         
     clickButton(waitForObject(names.refine_view_button_frame_button_refine_DelayButton))
     
-    try:
-        waitForObject(names.scrollArea_toolbar_btn_freecut_GroupButton, 600000)
-        snooze(2)
-    except LookupError:
-        test.log("The wait time isn't long enough")
+    #Wait until refinement is done
+    while object.exists(names.progress_view_button_cancel_progress):
+        snooze(3)
+        
     test.compare(waitForObjectExists(names.scrollArea_toolbar_btn_freecut_GroupButton).visible, True)
     test.compare(waitForObject(names.toolbar_btn_scan_area).visible, True)
     test.compare(waitForObject(names.toolbar_btn_intraoral).visible, True)
@@ -560,7 +561,8 @@ def exportFile(format, type, path):
     snooze(2)   
     #Export format drop down list
     #mouseClick(waitForObject(names.cbExportFormat_StyleComboBox), 381, 28, Qt.LeftButton)
-    mouseClick(waitForObject(names.o_Image), 15, 7, Qt.LeftButton)
+    mouseClick(findImage("D:\\Eva\\acq_dallas_automation_test\\images\\dropDownIcon.png"))
+    #mouseClick(waitForObject(names.o_Image), 15, 7, Qt.LeftButton)
     
     snooze(2)
     if "PLY" == format:
@@ -574,12 +576,12 @@ def exportFile(format, type, path):
     snooze(2)
     if "orth" == type:
         #mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\OrthType.png")) 
-        mouseClick(waitForObject(names.content_page_Orthodontics_StyleRadioButton), 83, 21, Qt.LeftButton)
+        mouseClick(waitForObject(names.content_page_Orthodontics_StyleRadioButton), 90, 24, Qt.LeftButton)
     elif "restore" == type:
         #mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\RestoreType.png")) 
-        mouseClick(waitForObject(names.content_page_Restoration_StyleRadioButton), 83, 21, Qt.LeftButton)
+        mouseClick(waitForObject(names.content_page_Restoration_StyleRadioButton), 78, 21, Qt.LeftButton)
     elif "implant" == type:
-        mouseClick(waitForObject(names.content_page_Implant_StyleRadioButton), 83, 21, Qt.LeftButton)
+        mouseClick(waitForObject(names.content_page_Implant_StyleRadioButton), 70, 21, Qt.LeftButton)
     snooze(2)
     previousFolders = countFolder(path)
     mouseClick(waitForObject(names.save_StyleButton), 70, 17, Qt.LeftButton)

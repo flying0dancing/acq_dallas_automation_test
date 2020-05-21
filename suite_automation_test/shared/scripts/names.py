@@ -29,18 +29,25 @@ btn_box_OK_QPushButton = {"container": btn_frame_btn_box_CsdDialogButtonBox, "te
 btn_box_Yes_QPushButton = {"container": btn_frame_btn_box_CsdDialogButtonBox, "text": "Yes", "type": "QPushButton", "unnamed": 1, "visible": 1}
 btn_box_No_QPushButton = {"container": btn_frame_btn_box_CsdDialogButtonBox, "text": "No", "type": "QPushButton", "unnamed": 1, "visible": 1}
 #oK_StyleButton = {"checkable": True, "container": o_QtQuickWidget, "text": "OK", "type": "StyleButton", "unnamed": 1, "visible": True}
-oK_StyleButton = {"checkable": True, "container": o_QtQuickWidget, "text": "OK, got it", "type": "StyleButton", "unnamed": 1, "visible": True}
+
+#oK_StyleButton = {"checkable": True, "container": o_QtQuickWidget, "text": "OK, got it", "type": "StyleButton", "unnamed": 1, "visible": True}
+o_QmlWidget = {"type": "QmlWidget", "unnamed": 1, "visible": 1, "window": o_MessageDialog}
+oK_StyleButton = {"checkable": True, "container": o_QmlWidget, "text": "OK, got it", "type": "StyleButton", "unnamed": 1, "visible": True}
 
 #BallonInfoLabel
 workspace_BalloonInfoBar_BalloonInfoBar = {"container": mainWindow_workspace_WorkSpace, "name": "BalloonInfoBar", "type": "BalloonInfoBar", "visible": 1}
 #balloonInfoBar_InfoLabel_QLabel = {"container": workspace_BalloonInfoBar_BalloonInfoBar, "name": "InfoLabel", "type": "QLabel", "visible": 1}
-balloonInfoBar_QtQuickWidget = {"container": workspace_BalloonInfoBar_BalloonInfoBar, "type": "QtQuickWidget", "unnamed": 1, "visible": 1}
-balloonInfoBar_InfoLabel_QLabel = {"container": balloonInfoBar_QtQuickWidget, "occurrence": 4, "type": "Rectangle", "unnamed": 1, "visible": True}
+#balloonInfoBar_QtQuickWidget = {"container": workspace_BalloonInfoBar_BalloonInfoBar, "type": "QtQuickWidget", "unnamed": 1, "visible": 1}
+#balloonInfoBar_InfoLabel_QLabel = {"container": balloonInfoBar_QtQuickWidget, "occurrence": 4, "type": "Rectangle", "unnamed": 1, "visible": True}
+
+balloonInfoBar_QmlWidget = {"container": workspace_BalloonInfoBar_BalloonInfoBar, "type": "QmlWidget", "unnamed": 1, "visible": 1}
+balloonInfoBar_InfoLabel_QLabel = {"container": balloonInfoBar_QmlWidget, "occurrence": 2, "type": "Rectangle", "unnamed": 1, "visible": True}
 
 
 #Busy dialogue
 mainWindow_BusyDialog = {"type": "BusyDialog", "unnamed": 1, "visible": 1, "window": mainWindow_MainWindow}
 animateRect_Rectangle = {"container": mainWindow_BusyDialog, "id": "animateRect", "type": "Rectangle", "unnamed": 1, "visible": True}
+import_Scan_Data_StyleLabel = {"container": mainWindow_BusyDialog, "text": "Import Scan Data", "type": "StyleLabel", "unnamed": 1, "visible": True}
 
 
 #Startup screen with scan and import labels, can be used by mouseClick API
@@ -245,7 +252,9 @@ o_ExportPage_2 = {"container": o_ListView, "index": 2, "type": "ExportPage", "un
 btnBrowseExportPath_StyleButton = {"checkable": False, "container": o_ExportPage_2, "id": "btnBrowseExportPath", "type": "StyleButton", "unnamed": 1, "visible": True}
 #Drop down list for export format
 o_Image = {"container": o_ExportPage_2, "source": "qrc:///image/general/general_combobox_down_dark.svg", "type": "Image", "unnamed": 1, "visible": True}
-o_Overlay = {"container": workspace_QtQuickWidget, "type": "Overlay", "unnamed": 1, "visible": True}
+#o_Overlay = {"container": workspace_QtQuickWidget, "type": "Overlay", "unnamed": 1, "visible": True}
+workspace_QmlWidget = {"container": mainWindow_workspace_WorkSpace, "type": "QmlWidget", "unnamed": 1, "visible": 1}
+o_Overlay = {"container": workspace_QmlWidget, "type": "Overlay", "unnamed": 1, "visible": True}
 cbExportFormat_StyleComboBox = {"container": o_ExportPage_2, "id": "cbExportFormat", "type": "StyleComboBox", "unnamed": 1, "visible": True}
 
 #The first selection for a drop down overlay
@@ -279,20 +288,15 @@ save_DICOM_File_StyleLabel = {"container": mainWindow_BusyDialog, "text": "Save 
 scrollView_ScrollView = {"container": workspace_QtQuickWidget, "id": "scrollView", "type": "ScrollView", "unnamed": 1, "visible": True}
 scrollView_cbExportFormat_StyleComboBox = {"container": scrollView_ScrollView, "id": "cbExportFormat", "type": "StyleComboBox", "unnamed": 1, "visible": True}
 
-save_StyleButton = {"checkable": False, "container": workspace_QtQuickWidget, "id": "id_save_btn", "text": "Save", "type": "StyleButton", "unnamed": 1, "visible": True}
-save_and_Exit_StyleButton = {"checkable": False, "container": workspace_QtQuickWidget, "id": "id_save_and_exit_btn", "text": "Save and Exit", "type": "StyleButton", "unnamed": 1, "visible": True}
-cancel_StyleButton = {"checkable": False, "container": workspace_QtQuickWidget, "id": "id_cancel_btn", "text": "Cancel", "type": "StyleButton", "unnamed": 1, "visible": True}
-
-content_page_SwipeView = {"container": workspace_QtQuickWidget, "id": "content_page", "type": "SwipeView", "unnamed": 1, "visible": True}
-content_page_Rectangle = {"container": content_page_SwipeView, "occurrence": 34, "type": "Rectangle", "unnamed": 1, "visible": True}
-content_page_Rectangle_2 = {"container": content_page_SwipeView, "occurrence": 36, "type": "Rectangle", "unnamed": 1, "visible": True}
-content_page_Rectangle_3 = {"container": content_page_SwipeView, "occurrence": 38, "type": "Rectangle", "unnamed": 1, "visible": True}
-
+workspace_QmlWidget = {"container": mainWindow_workspace_WorkSpace, "type": "QmlWidget", "unnamed": 1, "visible": 1}
+content_page_SwipeView = {"container": workspace_QmlWidget, "id": "content_page", "type": "SwipeView", "unnamed": 1, "visible": True}
 content_page_Orthodontics_StyleRadioButton = {"checkable": True, "container": content_page_SwipeView, "occurrence": 3, "text": "Orthodontics", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
 content_page_Restoration_StyleRadioButton = {"checkable": True, "container": content_page_SwipeView, "occurrence": 3, "text": "Restoration", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
 content_page_Implant_StyleRadioButton = {"checkable": True, "container": content_page_SwipeView, "occurrence": 3, "text": "Implant", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
 
-
+save_StyleButton = {"container": workspace_QmlWidget, "occurrence": 2, "text": "Save", "type": "Text", "unnamed": 1, "visible": True}
+save_and_Exit_StyleButton = save_and_Exit_Text = {"container": workspace_QmlWidget, "text": "Save and Exit", "type": "Text", "unnamed": 1, "visible": True}
+cancel_StyleButton = {"container": workspace_QmlWidget, "text": "Cancel", "type": "Text", "unnamed": 1, "visible": True}
 
 
 
