@@ -64,19 +64,29 @@ catalog_bar_btn_bite = {"container": mainWindow_workspace_WorkSpace, "name": "ca
 catalog_bar_btn_switch = {"container": mainWindow_workspace_WorkSpace, "name": "catalog_bar.btn_switch", "type": "csStateButton", "visible": 1}
 
 #Work flow bar buttons
-workflow_bar_btn_common = {"container": mainWindow_workspace_WorkSpace, "name": "workflow_bar.btn_common", "type": "csStateButton", "visible": 1}
-workflow_bar_btn_cut_hole = {"container": mainWindow_workspace_WorkSpace, "name": "workflow_bar.btn_cut", "type": "csStateButton", "visible": 1}
-workflow_bar_btn_implant = {"container": mainWindow_workspace_WorkSpace, "name": "workflow_bar.btn_implant", "type": "csStateButton", "visible": 1}
-workflow_bar_btn_impression = {"container": mainWindow_workspace_WorkSpace, "name": "workflow_bar.btn_impression", "type": "csStateButton", "visible": 1}
-workflow_bar_btn_postscan = {"container": mainWindow_workspace_WorkSpace, "name": "workflow_bar.btn_postscan", "type": "csStateButton", "visible": 1}
-workflow_bar_btn_extra = {"container": mainWindow_workspace_WorkSpace, "name": "workflow_bar.btn_extra", "type": "csStateButton", "visible": 1}
-general_increase_csButton = {"container": mainWindow_workspace_WorkSpace, "name": "general_increase", "type": "csButton", "visible": 1}
+#workflow_bar_btn_common = {"container": mainWindow_workspace_WorkSpace, "name": "workflow_bar.btn_common", "type": "csStateButton", "visible": 1}
+workspace_CatalogBar_CatalogBar = {"container": mainWindow_workspace_WorkSpace, "name": "CatalogBar", "type": "CatalogBar", "visible": 1}
+workspace_CatalogBar_WorkFlowBar = {"container": mainWindow_workspace_WorkSpace, "leftWidget": workspace_CatalogBar_CatalogBar, "type": "WorkFlowBar", "unnamed": 1, "visible": 1}
+workflow_bar_btn_common = {"checkable": True, "container": workspace_CatalogBar_WorkFlowBar, "objectName": "workflow_bar.btn_common", "type": "StateButton", "visible": True}
+
+
+workflow_bar_btn_cut_hole = {"checkable": True, "container": workspace_CatalogBar_WorkFlowBar, "objectName": "workflow_bar.btn_cut", "type": "csStateButton", "visible": 1}
+workflow_bar_btn_implant = {"checkable": True, "container": workspace_CatalogBar_WorkFlowBar, "objectName": "workflow_bar.btn_implant", "type": "StateButton", "visible": True}
+workspace_Next_csButton = {"container": mainWindow_workspace_WorkSpace, "text": "Next", "type": "csButton", "unnamed": 1, "visible": 1}
+
+workflow_bar_btn_impression = {"checkable": True, "container": workspace_CatalogBar_WorkFlowBar, "objectName": "workflow_bar.btn_impression", "type": "csStateButton", "visible": 1}
+
+workflow_bar_btn_postscan = {"checkable": True, "container": workspace_CatalogBar_WorkFlowBar, "objectName": "workflow_bar.btn_preparation", "type": "StateButton", "visible": True}
+workflow_bar_btn_extra = {"checkable": True, "container": workspace_CatalogBar_WorkFlowBar, "objectName": "workflow_bar.btn_extra", "type": "csStateButton", "visible": 1}
+general_increase_csButton = {"checkable": True, "container": workspace_CatalogBar_WorkFlowBar, "objectName": "general_increase", "type": "csButton", "visible": 1}
+
 
 #Toolbar buttons, relative position = (36, 42)
-toolbar_btn_cut = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_cut", "type": "csStateButton", "visible": 1}
+#toolbar_btn_cut = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_cut", "type": "csStateButton", "visible": 1}
 workspace_ScrollArea_QScrollArea = {"container": mainWindow_workspace_WorkSpace, "name": "ScrollArea", "type": "QScrollArea", "visible": 1}
 scrollArea_toolbar_btn_cut_GroupButton = {"container": workspace_ScrollArea_QScrollArea, "name": "toolbar.btn_cut", "type": "GroupButton", "visible": 1}
 scrollArea_toolbar_btn_freecut_GroupButton = {"container": workspace_ScrollArea_QScrollArea, "name": "toolbar.btn_freecut", "type": "GroupButton", "visible": 1}
+
 
 toolbar_btn_scan_area = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_scan_area", "type": "csStateButton", "visible": 1}
 toolbar_btn_intraoral = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_intraoral", "type": "csStateButton", "visible": 1}
@@ -297,6 +307,5 @@ content_page_Implant_StyleRadioButton = {"checkable": True, "container": content
 save_StyleButton = {"container": workspace_QmlWidget, "occurrence": 2, "text": "Save", "type": "Text", "unnamed": 1, "visible": True}
 save_and_Exit_StyleButton = save_and_Exit_Text = {"container": workspace_QmlWidget, "text": "Save and Exit", "type": "Text", "unnamed": 1, "visible": True}
 cancel_StyleButton = {"container": workspace_QmlWidget, "text": "Cancel", "type": "Text", "unnamed": 1, "visible": True}
-
 
 

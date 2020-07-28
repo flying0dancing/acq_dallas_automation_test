@@ -144,7 +144,7 @@ def checkButtonState(type):
 #            mouseClick(waitForImage("..\\..\\..\\images\\scrollUpButton.png"))
         snooze(2)
         test.verify(waitForObject(names.toolbar_btn_parallelism_check).visible == True, "Parallelism button should be visible.")
-        test.verify(waitForObject(names.workflow_bar_btn_common).checked == True, "Common scan should be selected.")
+        #test.verify(waitForObject(names.workflow_bar_btn_common).checked == True, "Common scan should be selected.")
         test.log("Verify buttons for Orth data.")
     elif type == "restore":
         #test.verify(waitForObject(names.workflow_bar_btn_common).checked == False, "Common scan should be deselected.")
@@ -155,26 +155,31 @@ def checkButtonState(type):
         
         
         if object.exists(names.workflow_bar_btn_postscan):
-            test.verify(waitForObject(names.workflow_bar_btn_common).checked == False, "Common scan should be deselected.")
-            test.verify(waitForObject(names.workflow_bar_btn_postscan).checked == True, "The post scan button should be selected.")
+            #test.verify(waitForObject(names.workflow_bar_btn_common).checked == True, "Common scan should be selected.")
+            #test.verify(waitForObject(names.workflow_bar_btn_postscan).checked == False, "The post scan button should be deselected.")
             test.verify(waitForObject(names.toolbar_btn_intraoral).visible == True, "Intraoral button should be visible.")
             test.verify(waitForObject(names.toolbar_btn_lock).visible == True, "Lock button should be visible.")
             test.verify(waitForObject(names.toolbar_btn_measurement).visible == True, "Measurement button should be visible.")
             test.verify(waitForObject(names.toolbar_btn_parallelism_check).visible == True, "Parallelism button should be visible.")
             test.log("Verify buttons for postscan data.")
         else:
-            test.verify(waitForObject(names.workflow_bar_btn_impression).checked == True, "The impression button should be selected.")
-            test.verify(waitForObject(names.workflow_bar_btn_common).checked == False, "Common scan should be deselected.")
+            #test.verify(waitForObject(names.workflow_bar_btn_impression).checked == False, "The impression button should be selected.")
+            test.verify(waitForObject(names.workflow_bar_btn_common).checked == True, "Common scan should be deselected.")
             test.log("Verify buttons for impression data.")
     elif type == "implant":
+        snooze(2)
+        mouseClick(waitForObject(names.workflow_bar_btn_implant, 94506), 26, 24, Qt.LeftButton)
+        snooze(2)
+        clickButton(waitForObject(names.workspace_Next_csButton))
+        snooze(2)
         test.verify(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_freeze).visible == True, "Freeze button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_scanbody_area).visible == True, "Scanbody area button should be visible")
         test.verify(waitForObject(names.toolbar_btn_scan_history).visible == True, "Scan history button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_parallelism_check).visible == True, "Parallelism button should be visible.")
-        test.verify(waitForObject(names.workflow_bar_btn_common).checked == False, "Common scan should be deselected.")
-        test.verify(waitForObject(names.workflow_bar_btn_cut_hole).checked == False, "Cut hole button shouldn't be selected.")
-        test.verify(waitForObject(names.workflow_bar_btn_implant).checked == True, "Implant button should be selected.")
+        #test.verify(waitForObject(names.workflow_bar_btn_common).checked == False, "Common scan should be deselected.")
+        #test.verify(waitForObject(names.workflow_bar_btn_cut_hole).checked == False, "Cut hole button shouldn't be selected.")
+        #test.verify(waitForObject(names.workflow_bar_btn_implant).checked == True, "Implant button should be selected.")
         test.log("Verify buttons for implant data.") 
     
 # Perform free cut on upper jaw
@@ -258,18 +263,20 @@ def refineMesh(resolution):
     
     #Wait until refinement is done
     while object.exists(names.progress_view_button_cancel_progress):
-        snooze(3)
-        
-    test.compare(waitForObjectExists(names.scrollArea_toolbar_btn_freecut_GroupButton).visible, True)
-    test.compare(waitForObject(names.toolbar_btn_scan_area).visible, True)
-    test.compare(waitForObject(names.toolbar_btn_intraoral).visible, True)
+        snooze(10)
+        test.log("Wait for another 10s.")
+    snooze(4)
+    test.compare(waitForObjectExists(names.scrollArea_toolbar_btn_cut_GroupButton).visible, True)
+    test.compare(waitForObjectExists(names.toolbar_btn_scan_area).visible, True)
+    test.compare(waitForObjectExists(names.toolbar_btn_intraoral).visible, True)
     snooze(2)
     test.log("Perform refinement.")
 
+    
 #Check buttons after refinement
 def checkAfterRefine(type):
     try:
-        test.verify(waitForObject(names.scrollArea_toolbar_btn_freecut_GroupButton).visible == True, "Cut button should be visible.")
+        test.verify(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_scan_area).visible == True, "Scan area button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_intraoral).visible == True, "Intraoral button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_quadrant_snapshot).visible == True, "Quadrant button should be visible.")
@@ -345,7 +352,7 @@ def refineMeshWithShade(resolution):
         snooze(2)
     except LookupError:
         test.log("The wait time isn't long enough")
-    test.compare(waitForObjectExists(names.scrollArea_toolbar_btn_freecut_GroupButton).visible, True)
+    test.compare(waitForObjectExists(names.scrollArea_toolbar_btn_cut_GroupButton).visible, True)
     test.compare(waitForObject(names.toolbar_btn_scan_area).visible, True)
     test.compare(waitForObject(names.toolbar_btn_intraoral).visible, True)
     snooze(2)
@@ -593,6 +600,16 @@ def exportFile(format, type, path):
     mouseClick(findImage("D:\\Eva\\acq_dallas_automation_test\\images\\shareButton.png"))
     snooze(1)
     mouseClick(waitForImage(r"D:\Eva\acq_dallas_automation_test\images\checkButton2.png"))
+    snooze(2)
+
+"""Export STL or PLY files"""
+def export_STL_PLY(type, path):
+        
+    #Export to PLY format
+    exportFile("PLY", type, path)
+    #Export to STL format
+    exportFile("STL", type, path)
+    
     snooze(2)
 
 #Open with 3rd party software

@@ -1,4 +1,4 @@
-import os
+import names
 
 APPNAME = "cs_scanflow C:\\ProgramData\\TW\\AcqAltair\\InputData.xml"
 
@@ -23,4 +23,4 @@ def adapt_view_check(file, type):
     #test.verify(waitForObject(names.toolbar_btn_mesh_cleaning).visible == True, "Mesh cleaning button should be visible.")
     test.verify(waitForObject(names.toolbar_btn_mesh_closure).visible == True, "Mesh closure button should be visible.")
     snooze(2)
-    os.system("taskkill /f /im cs_scanflow.exe")
+    
