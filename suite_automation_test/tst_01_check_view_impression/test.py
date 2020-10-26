@@ -11,6 +11,9 @@ def main():
 
     startApplication(APPNAME)
     mouseClick(waitForObject(names.oK_StyleButton), 153, 30, Qt.LeftButton)
+    snooze(3)
+    mouseClick(UiTypes.ScreenPoint(410,950), Qt.NoModifier, Qt.LeftButton)
+    snooze(2)
     #Import Orth data and check buttons on scan view
     importData(file, file_type, "normal")    
     #Refine mesh

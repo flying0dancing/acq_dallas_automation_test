@@ -7,6 +7,11 @@ mainWindow_workspace_WorkSpace = {"name": "workspace", "type": "WorkSpace", "vis
 #Login dialogue
 mainWindow_UserLoginDialog = {"type": "UserLoginDialog", "unnamed": 1, "visible": 1, "window": mainWindow_MainWindow}
 continue_without_signing_in_Text = {"container": mainWindow_UserLoginDialog, "text": "Continue without signing in", "type": "Text", "unnamed": 1, "visible": True}
+mainWindow_QWindowContainer = {"type": "QWindowContainer", "unnamed": 1, "visible": 1, "window": mainWindow_MainWindow}
+o_QQuickView = {"container": mainWindow_QWindowContainer, "type": "QQuickView", "unnamed": 1, "visible": True}
+sign_In_StyleButton = {"checkable": False, "container": o_QQuickView, "id": "btnSignIn", "text": "Sign In", "type": "StyleButton", "unnamed": 1, "visible": True}
+password_PlaceholderText = {"container": o_QQuickView, "text": "Password", "type": "PlaceholderText", "unnamed": 1, "visible": True}
+txtPassword_ImageTextField = {"container": o_QQuickView, "echoMode": 2, "id": "txtPassword", "passwordCharacter": "●", "type": "ImageTextField", "unnamed": 1, "visible": True}
 
 #Main menu
 mainWindow_button_menu_csButton = {"name": "button_menu", "type": "csButton", "visible": 1, "window": mainWindow_MainWindow}
@@ -33,6 +38,7 @@ btn_box_No_QPushButton = {"container": btn_frame_btn_box_CsdDialogButtonBox, "te
 #oK_StyleButton = {"checkable": True, "container": o_QtQuickWidget, "text": "OK, got it", "type": "StyleButton", "unnamed": 1, "visible": True}
 o_QmlWidget = {"type": "QmlWidget", "unnamed": 1, "visible": 1, "window": o_MessageDialog}
 oK_StyleButton = {"checkable": True, "container": o_QmlWidget, "text": "OK, got it", "type": "StyleButton", "unnamed": 1, "visible": True}
+
 
 #BallonInfoLabel
 workspace_BalloonInfoBar_BalloonInfoBar = {"container": mainWindow_workspace_WorkSpace, "name": "BalloonInfoBar", "type": "BalloonInfoBar", "visible": 1}
@@ -226,6 +232,7 @@ toolbar_btn_plane_cut = {"container": mainWindow_workspace_WorkSpace, "name": "t
 workspace_QtQuickWidget = {"container": mainWindow_workspace_WorkSpace, "type": "QtQuickWidget", "unnamed": 1, "visible": 1}
 #workspace_VTKMeshWidget = {"container": mainWindow_workspace_WorkSpace, "type": "VTKMeshWidget", "unnamed": 1, "visible": 1}
 scrollArea_toolbar_btn_cut_GroupButton = {"container": workspace_ScrollArea_QScrollArea, "name": "toolbar.btn_cut", "type": "GroupButton", "visible": 1}
+scrollArea_toolbar_btn_mesh_cleaning_GroupButton = {"container": workspace_ScrollArea_QScrollArea, "name": "toolbar.btn_mesh_cleaning", "type": "GroupButton", "visible": 1}
 
 
 #Sliders under mesh cleaning tools
@@ -295,6 +302,7 @@ btn_not_show_again_QPushButton = {"name": "btn_not_show_again_", "type": "QPushB
 btn_ok_QPushButton = {"name": "btn_ok_", "type": "QPushButton", "visible": 1, "window": o_BackgroundDialog}
 
 save_DICOM_File_StyleLabel = {"container": mainWindow_BusyDialog, "text": "Save DICOM File", "type": "StyleLabel", "unnamed": 1, "visible": True}
+processing_please_wait_StyleLabel = {"container": mainWindow_BusyDialog, "text": "Processing, please wait.", "type": "StyleLabel", "unnamed": 1, "visible": True}
 scrollView_ScrollView = {"container": workspace_QtQuickWidget, "id": "scrollView", "type": "ScrollView", "unnamed": 1, "visible": True}
 scrollView_cbExportFormat_StyleComboBox = {"container": scrollView_ScrollView, "id": "cbExportFormat", "type": "StyleComboBox", "unnamed": 1, "visible": True}
 

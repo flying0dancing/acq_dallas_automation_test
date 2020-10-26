@@ -260,7 +260,7 @@ def refineMesh(resolution):
         clickButton(waitForObject(names.refine_view_resolution_frame_button_resolution_low_csButton))
         
     clickButton(waitForObject(names.refine_view_button_frame_button_refine_DelayButton))
-    
+    snooze(4)
     #Wait until refinement is done
     while object.exists(names.progress_view_button_cancel_progress):
         snooze(10)
@@ -275,6 +275,7 @@ def refineMesh(resolution):
     
 #Check buttons after refinement
 def checkAfterRefine(type):
+    snooze(2)
     try:
         test.verify(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_scan_area).visible == True, "Scan area button should be visible.")
@@ -548,7 +549,7 @@ def setDirectory(directory):
     snooze(2)
     nativeType("<Return>")
     snooze(4)
-    mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\shareButton.png"))
+    mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\sendToButton.png"))
     snooze(2)
     mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\checkButton2.png"))
     snooze(2)
@@ -595,12 +596,13 @@ def exportFile(format, type, path):
     snooze(7)
     laterFolder = countFolder(path)
     test.verify(laterFolder == previousFolders + 1, "The folder count should be added 1.")
-    while object.exists(names.save_DICOM_File_StyleLabel):
+    while object.exists(names.processing_please_wait_StyleLabel):
         snooze(5)
-    mouseClick(findImage("D:\\Eva\\acq_dallas_automation_test\\images\\shareButton.png"))
+    mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\sendToButton.png"))
     snooze(1)
     mouseClick(waitForImage(r"D:\Eva\acq_dallas_automation_test\images\checkButton2.png"))
     snooze(2)
+
 
 """Export STL or PLY files"""
 def export_STL_PLY(type, path):
