@@ -110,6 +110,7 @@ def importData(filename, type, flag):
     nativeType(filename)
     snooze(2)
     nativeType("<Return>")
+    nativeType("<Return>")
     if "shade" == flag:
         try:
             clickButton(waitForObject(names.btn_box_OK_QPushButton, 600000))
@@ -117,13 +118,10 @@ def importData(filename, type, flag):
         except LookupError:
             test.log("The ok doesn't show up.")
     elif "normal" == flag:
-        try:
-            while object.exists(names.import_Scan_Data_StyleLabel):
-                snooze(3)
-            #waitForObject(names.balloonInfoBar_InfoLabel_QLabel, 600000)
-            #snooze(2)
-        except LookupError:
-            test.log("The balloon info bar doesn't show up.")
+        snooze(2)
+        while object.exists(names.import_Scan_Data_StyleLabel):
+            snooze(3)
+            
     test.log("Import data with name: %s" % filename)
     checkButtonState(type)
     snooze(2)
@@ -139,7 +137,7 @@ def checkButtonState(type):
         test.verify(waitForObject(names.toolbar_btn_freeze).visible == True, "Freeze button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_scan_history).visible == True, "Scan history button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_delete_all).visible == True, "Delete button should be visible.")
-        test.verify(waitForObject(names.toolbar_btn_measurement).visible == True, "Measurement button should be visible.")
+       # test.verify(waitForObject(names.toolbar_btn_measurement).visible == True, "Measurement button should be visible.")
 #        if object.exists("..\\..\\..\\images\\scrollUpButton.png"):
 #            mouseClick(waitForImage("..\\..\\..\\images\\scrollUpButton.png"))
         snooze(2)
