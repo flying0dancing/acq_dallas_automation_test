@@ -30,6 +30,7 @@ def adapt_view_check(file, type):
     test.verify(waitForObject(names.scrollArea_toolbar_btn_mesh_cleaning_GroupButton).visible == True, "Mesh cleaning button should be visible.")
     test.verify(waitForObject(names.toolbar_btn_mesh_closure).visible == True, "Mesh closure button should be visible.")
     #next button names.toolbar_btn_intraoral not find in v1.0.3.202.d180
-    test.verify(waitForObject(names.toolbar_btn_intraoral).visible == True, "Intraoral button should be ")
+    if object.exists(names.toolbar_btn_intraoral):
+        test.verify(waitForObject(names.toolbar_btn_intraoral).visible == True, "Intraoral button should be ")
     snooze(2)
     

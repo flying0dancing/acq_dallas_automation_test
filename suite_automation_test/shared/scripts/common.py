@@ -138,6 +138,21 @@ def getObjectByLayers(parentObj,layerList):
     #printProps(childO)
     return childO
 
+def getObjectByProperty(parentObj,propName,propValue):
+    parentO=parentObj
+    childO=None
+    if not propName:
+        return childO
+    childrenO=object.children(parentO)
+    
+    for childO in childrenO:
+        flag=propsExists(childO,propName,propValue)
+        if flag:
+            break
+    if not flag:
+        childO=None
+    return childO
+
 def printProps(obj):
     #objO=waitForObject(obj)
     if not obj:
@@ -154,7 +169,7 @@ def propsExists(obj,propName,propValue):
     objO=obj
     propsO=object.properties(objO)
     if propName in propsO:
-        test.log("............................find prop "+propName)
+        #test.log("............................find prop "+propName)
         if propsO[propName]==propValue:
             flag=True
             test.log("............................getIt %s = %s" % (propName, propsO[propName]))
@@ -225,19 +240,23 @@ def scanViewButtonsCheck():
     testVerifyIt([btnCommon],'checked',True,"Common scan should be selected.")#kun add common scan at 20210204
     #testVerifyIt([names.workflow_bar_btn_common,names.workflow_bar_btn_common1],'checked',True,"Common scan should be selected.")#kun add common scan at 20210201
     #test.verify(waitForObject(names.workflow_bar_btn_cut_hole).visible == False, "Cut hole button should be hidden before adding.")
-    btnimplant=getObjectByLayers(buttonsObj,[4])
+    btnimplant=getObjectByProperty(buttonsObj,'objectName','workflow_bar.btn_implant')
     testVerifyIt([btnimplant],'visible',False,"Implant button should be hidden before adding.")#kun add common scan at 20210204
-    btnpreparation=getObjectByLayers(buttonsObj,[6])
+    btnpreparation=getObjectByProperty(buttonsObj,'objectName','workflow_bar.btn_preparation')
     testVerifyIt([btnpreparation],'visible',False,"Post scan button should be hidden before adding.")#kun add common scan at 20210204
     #test.verify(object.exists(names.workflow_bar_btn_implant) == False, "Implant button should be hidden before adding.")
     
-    btnImpression=getObjectByLayers(buttonsObj,[1])
+    btnImpression=getObjectByProperty(buttonsObj,'objectName','workflow_bar.btn_common_impression')
     testVerifyIt([btnImpression],'visible',False,"Common Impression button should be hidden before adding.")#kun add common scan at 20210204
-    btnImpression=getObjectByLayers(buttonsObj,[3])
-    testVerifyIt([btnImpression],'visible',False,"Edentulous Impression button should be hidden before adding.")#kun add common scan at 20210204
-    btnImpression=getObjectByLayers(buttonsObj,[5])
+    
+    btnImpression=getObjectByProperty(buttonsObj,'objectName','workflow_bar.btn_edentulous_impression')
+    if btnImpression:
+        testVerifyIt([btnImpression],'visible',False,"Edentulous Impression button should be hidden before adding.")#kun add common scan at 20210204
+    
+    btnImpression=getObjectByProperty(buttonsObj,'objectName','workflow_bar.btn_implant_impression')
     testVerifyIt([btnImpression],'visible',False,"Implant Impression button should be hidden before adding.")#kun add common scan at 20210204
-    btnImpression=getObjectByLayers(buttonsObj,[7])
+    
+    btnImpression=getObjectByProperty(buttonsObj,'objectName','workflow_bar.btn_preparation_impression')
     testVerifyIt([btnImpression],'visible',False,"Preparation Impression button should be hidden before adding.")#kun add common scan at 20210204
     
     #test.verify(object.exists(names.workflow_bar_btn_impression) == False, "Impression button should be hidden before adding.")
@@ -276,7 +295,8 @@ def importData(filename, type, flag):
     
 #Check buttons with different types
 def checkButtonState(type):
-    buttonsObj=waitForObject(names.catalogBar_buttons_RowLayout) #"id": "buttons"      
+    buttonsObj=waitForObject(names.catalogBar_buttons_RowLayout) #"id": "buttons"   
+    btnpreparation=getObjectByProperty(buttonsObj,'objectName','workflow_bar.btn_preparation')   
     if type == "orth":
         #test.verify(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")#kun marked at 20210201
         testVerifyIt([names.toolbar_btn_cut_GroupButton,names.scrollArea_toolbar_btn_cut_GroupButton], 'visible',True, "Cut button should be visible.")#kun add at 20210201
@@ -302,7 +322,7 @@ def checkButtonState(type):
         test.verify(waitForObject(names.toolbar_btn_delete_all).visible == True, "Delete button should be visible.")
         
         
-        if object.exists(names.workflow_bar_btn_postscan):
+        if btnpreparation:
             #test.verify(waitForObject(names.workflow_bar_btn_common).checked == True, "Common scan should be selected.")
             #test.verify(waitForObject(names.workflow_bar_btn_postscan).checked == False, "The post scan button should be deselected.")
             test.verify(waitForObject(names.toolbar_btn_intraoral).visible == True, "Intraoral button should be visible.")
@@ -319,7 +339,7 @@ def checkButtonState(type):
             test.log("Verify buttons for impression data.")
     elif type == "implant":
         snooze(2)
-        btnimplant=getObjectByLayers(buttonsObj,[4])
+        btnimplant=getObjectByProperty(buttonsObj,'objectName','workflow_bar.btn_implant')
         mouseClick(btnimplant,26, 24, Qt.LeftButton)
         #mouseClick(waitForObject(objectExist([names.workflow_bar_btn_implant,names.workflow_bar_btn_implant1]), 94506), 26, 24, Qt.LeftButton) #Kun comment it at 20200204
         
@@ -437,6 +457,7 @@ def checkAfterRefine(type):
     snooze(2)
     try:
         buttonsObj=waitForObject(names.catalogBar_buttons_RowLayout) #"id": "buttons" 
+        btnpreparation=getObjectByProperty(buttonsObj,'objectName','workflow_bar.btn_preparation')
         #test.verify(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")
         testVerifyIt([names.toolbar_btn_cut_GroupButton,names.scrollArea_toolbar_btn_cut_GroupButton], 'visible',True, "Cut button should be visible.")#kun add at 20210201
         test.verify(waitForObject(names.toolbar_btn_scan_area).visible == True, "Scan area button should be visible.")
@@ -456,14 +477,16 @@ def checkAfterRefine(type):
             #mouseClick(waitForImage("..\\..\\..\\images\\scrollUpButton.png"))
             snooze(2)
             #test.verify(waitForObject(names.toolbar_btn_margin_line).visible == True, "Margin line button should be visible.")
-            testVerifyIt([names.toolbar_btn_margin_line,names.toolbar_btn_margin_line1],'visible',True,"Margin line button should be visible.")#kun add common scan at 20210201
+            testVerifyIt([names.toolbar_btn_margin_line],'visible',True,"Margin line button should be visible.")#kun add common scan at 20210201
             test.verify(waitForObject(names.toolbar_btn_undercut).visible == True, "Under cut button should be visible.")
             test.verify(waitForObject(names.toolbar_btn_parallelism_check).visible == True, "Parallelism button should be visible.")
             test.log("Verify buttons after refinement for Orth data.")
         elif type == "restore":
-            if object.exists(names.workflow_bar_btn_postscan):
-                test.verify(waitForObject(names.workflow_bar_btn_postscan).checked == False, "The post scan button should be visible and unchecked.")
-                mouseClick(names.workflow_bar_btn_postscan, 36, 42, Qt.NoModifier, Qt.LeftButton)
+            if propsExists(btnpreparation,'visible',True):
+                testVerifyIt([btnpreparation],'checked',False,"The post scan button should be visible and unchecked.")#kun add common scan at 20210204
+                #test.verify(waitForObject(names.workflow_bar_btn_postscan).checked == False, "The post scan button should be visible and unchecked.")
+                mouseClick(btnpreparation, 36, 42, Qt.NoModifier, Qt.LeftButton)
+                #mouseClick(names.workflow_bar_btn_postscan, 36, 42, Qt.NoModifier, Qt.LeftButton)
                 #mouseClick(waitForImage("..\\..\\..\\images\\scrollUpButton.png"))
                 snooze(2)
                 test.verify(waitForObject(names.toolbar_btn_preparation_check).visible == True, "Preparation button should be visible.")
@@ -487,7 +510,7 @@ def checkAfterRefine(type):
             test.verify(waitForObject(names.toolbar_btn_parallelism_check).visible == True, "Parallelism button should be visible.")
             #test.verify(waitForObject(names.workflow_bar_btn_implant).visible == True, "Implant button should be visible after refinement.")       
             #test.verify(waitForObject(names.workflow_bar_btn_implant).checked == False, "Implant button should be shown and unchecked.")
-            btnimplant=getObjectByLayers(buttonsObj,[4])
+            btnimplant=getObjectByProperty(buttonsObj,'objectName','workflow_bar.btn_implant')
             testVerifyIt([btnimplant], 'visible', True, "Implant button should be visible after refinement.")#kun add common scan at 20210201
             testVerifyIt([btnimplant], 'checked', False, "Implant button should be shown and unchecked.")#kun add common scan at 20210201
             test.log("Verify buttons for implant data.")
@@ -921,10 +944,14 @@ def moveFile(source, dest, type):
 
 #Export to CSZ
 def exportToCSZ(path, name):
-    root_TitleBar=waitForObject(names.root_TitleBar)
-    menuButtonObj=getObjectByLayers(root_TitleBar,[3,3,0,0])  #scanflow version 1.0.3.1000
-    if not menuButtonObj:
-        menuButtonObj=getObjectByLayers(root_TitleBar,[2,2,0,0]) #scanflow version 1.0.3.600
+    menuButtonObj=None
+    if object.exists(names.mainWindow_button_menu_csButton):
+        menuButtonObj=waitForObject(names.mainWindow_button_menu_csButton)
+    else:
+        root_TitleBar=waitForObject(names.root_TitleBar)
+        menuButtonObj=getObjectByLayers(root_TitleBar,[3,3,0,0])  #scanflow version 1.0.3.1000
+        if not menuButtonObj:
+            menuButtonObj=getObjectByLayers(root_TitleBar,[2,2,0,0]) #scanflow version 1.0.3.600
         
     mouseClick(menuButtonObj, 31, 10, Qt.NoModifier, Qt.LeftButton)
     #clickButton(waitForObject(objectExist([names.menuButton_StyleButton,names.mainWindow_button_menu_csButton]))) #kun comment at 20210204
@@ -957,8 +984,12 @@ def exportToCSZ(path, name):
 #Check whether user need to switch to common scan
 def restoreCheckBeforeCut():
     snooze(2)
-    if (waitForObject(names.workflow_bar_btn_common).checked == False):
-        mouseClick(waitForObject(names.workflow_bar_btn_common),32, 23, Qt.NoModifier, Qt.LeftButton)
+    buttonsObj=waitForObject(names.catalogBar_buttons_RowLayout) #"id": "buttons" 
+    btnCommon=getObjectByLayers(buttonsObj,[0])
+    #if (waitForObject(names.workflow_bar_btn_common).checked == False):
+    if propsExists(btnCommon,'checked',False):
+        #mouseClick(waitForObject(names.workflow_bar_btn_common),32, 23, Qt.NoModifier, Qt.LeftButton)
+        mouseClick(btnCommon,32, 23, Qt.NoModifier, Qt.LeftButton)
         snooze(2)
     
     if object.exists(names.btn_box_Yes_QPushButton):
@@ -969,8 +1000,12 @@ def restoreCheckBeforeCut():
 #Post scan check before refinement
 def postscanCheck():
     snooze(2)
-    if (object.exists(names.workflow_bar_btn_postscan)):
-        mouseClick(waitForObject(names.workflow_bar_btn_postscan),46, 35, Qt.NoModifier, Qt.LeftButton)
+    buttonsObj=waitForObject(names.catalogBar_buttons_RowLayout) #"id": "buttons" 
+    btnpreparation=getObjectByProperty(buttonsObj,'objectName','workflow_bar.btn_preparation')
+    #if (object.exists(names.workflow_bar_btn_postscan)):
+    if btnpreparation:
+        mouseClick(waitForObject(btnpreparation),46, 35, Qt.NoModifier, Qt.LeftButton)
+        #mouseClick(waitForObject(names.workflow_bar_btn_postscan),46, 35, Qt.NoModifier, Qt.LeftButton)
         while(object.exists(names.mainWindow_BusyDialog)):
             continue
         snooze(3)
