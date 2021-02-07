@@ -12,8 +12,8 @@ def main():
     source(findFile("scripts", "common.py"))
     
     startApplication(APPNAME)
-    #clickButton(waitForObject(names.oK_StyleButton)) 
-    mouseClick(waitForObject(names.oK_StyleButton), 153, 30, Qt.LeftButton)
+    #Click ok button on the warn message which says it's an internal version
+    skipInternalVersionDlg()
     #Import data
     importData(file, file_type, "normal")
     

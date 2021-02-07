@@ -10,7 +10,6 @@ import shutil
 from remotesystem import RemoteSystem
 from pyautogui import screenshotUtil
 
-    
 # Switch tooth number standard
 def switchToothNumberSTD(standard):
     xmlFile = "C:\\ProgramData\\TW\\AcqAltair\\preference.xml"
@@ -63,6 +62,136 @@ def readFiles(dataPath):
     test.log("Return a list of all cszx files in a directory")
     return dataFiles
 
+        
+def testVerifyIt(objlist,propName,propExpectation,message):
+    flag=False
+    for tobj in objlist:
+        if isinstance(tobj,dict):
+            if object.exists(tobj):
+                try:
+                    obj=waitForObject(tobj)
+                    flag=propsExists(obj,propName,propExpectation)
+                    if flag:
+                        test.verify(propExpectation == propExpectation, message)
+                        break
+                    else:
+                        continue
+                except LookupError:
+                    pass
+        else:
+            flag=propsExists(tobj,propName,propExpectation)
+            if flag:
+                test.verify(propExpectation == propExpectation, message)
+                break
+            else:
+                continue
+    if not flag:
+        test.fail(message)
+        #test.verify('' == propExpectation, message)
+ 
+"""
+def testverifyItAttr(tobj,tattr,texpectation,tmessage):
+    flag=propsExists(obj,tattr,texpectation)
+    if flag:
+        test.verify(texpectation == texpectation, tmessage)
+    else:
+        test.verify(False == texpectation, tmessage)
+"""    
+    
+def objectExist(objlist):
+    existObj=None
+    for obj in objlist:
+        if object.exists(obj):
+            existObj=obj
+            break
+    return existObj
+"""
+def getItemInExportButtonList(listViewObj,selectIndex):
+    #listViewObj=objectExist(listViewObjlist)
+    #test.log(str(listViewObj))
+    listView=waitForObject(listViewObj)
+    titemObj = object.children(listView)
+    test.log(str(titemObj))
+    titems= object.children(titemObj[0])
+    index=-1
+    for titem in titems:
+        index+=1
+        if(index==selectIndex):
+            mouseClick(waitForObject(titem))
+            break
+ """    
+    
+def getObjectByLayers(parentObj,layerList):
+    #parentO=waitForObject(parentObj)
+    parentO=parentObj
+    childO=None
+    if not layerList:
+        return childO
+    for i in layerList:
+        childrenO=object.children(parentO)
+        if i>=len(childrenO):
+            childO=None
+            break
+        else:
+            childO=object.children(parentO)[i]
+        parentO=childO
+    #printProps(childO)
+    return childO
+
+def printProps(obj):
+    #objO=waitForObject(obj)
+    if not obj:
+        return
+    objO=obj
+    propsO=object.properties(objO)
+    for name,value in propsO.iteritems():
+        test.log("%s = %s" % (name, value))
+        
+def propsExists(obj,propName,propValue):
+    flag=False
+    if not obj:
+        return flag
+    objO=obj
+    propsO=object.properties(objO)
+    if propName in propsO:
+        test.log("............................find prop "+propName)
+        if propsO[propName]==propValue:
+            flag=True
+            test.log("............................getIt %s = %s" % (propName, propsO[propName]))
+    return flag
+
+# find item by id, type...using parent object
+def getObject(parentObjList,propName,propValue,resultList):
+    parentObject=None
+    if parentObjList:
+        for parentObj in parentObjList:
+            objList=None
+            try:
+                parentObject=waitForObject(parentObj)
+                objList=object.children(parentObject)
+                for tobj in objList:
+                    tprops=object.properties(tobj)
+                    test.log("props::::::"+str(tprops))
+                    if(propName in tprops):
+                        test.log("............................find prop")
+                        if(tprops[propName]==propValue):
+                            test.log("getIt.... %s = %s" % (propName, tprops[propName]))
+                            resultList.append(tobj)
+                            test.log("result list len:"+str(len(resultList)))
+                            test.log("get"+str(tobj))
+                        break
+                    if len(resultList)!=0:
+                        break
+            except LookupError:
+                test.log("cannot waitforObject")
+            if len(resultList)==0:
+                getObject(objList,propName,propValue,resultList)
+                
+    
+        
+    
+                
+        
 #Check buttons after user clicks scan label in home page
 def scanViewButtonsCheck():
     #clickButton(waitForObject(names.btn_box_OK_QPushButton))
@@ -75,10 +204,11 @@ def scanViewButtonsCheck():
         mouseClick(waitForObject(names.continue_without_signing_in_Text))
         snooze(2)
     mouseClick(waitForObject(names.scan_StyleLabel))
-    
-        
-    test.verify(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")
+    snooze(5)
+    test.verify(waitForObject(names.toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")
     test.verify(waitForObject(names.toolbar_btn_scan_area).visible == True, "Scan area button should be visible.")
+    #testVerifyVisible([names.scrollArea_toolbar_btn_scan_area_csStateButton,names.toolbar_btn_scan_area], True, "Scan area button should be visible.")
+    
     #test.verify(waitForObject(names.toolbar_btn_intraoral).visible == True, "Intraoral button should be visible.")
     test.verify(waitForObject(names.toolbar_btn_lock).visible == True, "Lock button should be visible.")
     test.verify(waitForObject(names.toolbar_btn_freeze).visible == True, "Freeze button should be visible.")
@@ -89,11 +219,29 @@ def scanViewButtonsCheck():
     #test.verify(waitForObject(names.toolbar_btn_parallelism_check).enabled == False, "Parallelism button should be disabled")
     test.verify(waitForObject(names.catalog_bar_btn_upper).checked == True, "Upper jaw should be selected.")
     test.verify(waitForObject(names.catalog_bar_btn_lower).checked == False, "Lower jaw shouldn't be selected.")
-    test.verify(waitForObject(names.workflow_bar_btn_common).checked == True, "Common scan should be selected.")
+    #test.verify(waitForObject(names.workflow_bar_btn_common).checked == True, "Common scan should be selected.") #kun mark it as comment at 20210201
+    buttonsObj=waitForObject(names.catalogBar_buttons_RowLayout) #"id": "buttons" 
+    btnCommon=getObjectByLayers(buttonsObj,[0])
+    testVerifyIt([btnCommon],'checked',True,"Common scan should be selected.")#kun add common scan at 20210204
+    #testVerifyIt([names.workflow_bar_btn_common,names.workflow_bar_btn_common1],'checked',True,"Common scan should be selected.")#kun add common scan at 20210201
     #test.verify(waitForObject(names.workflow_bar_btn_cut_hole).visible == False, "Cut hole button should be hidden before adding.")
-    test.verify(object.exists(names.workflow_bar_btn_implant) == False, "Implant button should be hidden before adding.")
-    test.verify(object.exists(names.workflow_bar_btn_impression) == False, "Impression button should be hidden before adding.")
-    test.verify(object.exists(names.workflow_bar_btn_postscan) == False, "Post scan button should be hidden before adding.")
+    btnimplant=getObjectByLayers(buttonsObj,[4])
+    testVerifyIt([btnimplant],'visible',False,"Implant button should be hidden before adding.")#kun add common scan at 20210204
+    btnpreparation=getObjectByLayers(buttonsObj,[6])
+    testVerifyIt([btnpreparation],'visible',False,"Post scan button should be hidden before adding.")#kun add common scan at 20210204
+    #test.verify(object.exists(names.workflow_bar_btn_implant) == False, "Implant button should be hidden before adding.")
+    
+    btnImpression=getObjectByLayers(buttonsObj,[1])
+    testVerifyIt([btnImpression],'visible',False,"Common Impression button should be hidden before adding.")#kun add common scan at 20210204
+    btnImpression=getObjectByLayers(buttonsObj,[3])
+    testVerifyIt([btnImpression],'visible',False,"Edentulous Impression button should be hidden before adding.")#kun add common scan at 20210204
+    btnImpression=getObjectByLayers(buttonsObj,[5])
+    testVerifyIt([btnImpression],'visible',False,"Implant Impression button should be hidden before adding.")#kun add common scan at 20210204
+    btnImpression=getObjectByLayers(buttonsObj,[7])
+    testVerifyIt([btnImpression],'visible',False,"Preparation Impression button should be hidden before adding.")#kun add common scan at 20210204
+    
+    #test.verify(object.exists(names.workflow_bar_btn_impression) == False, "Impression button should be hidden before adding.")
+    #test.verify(object.exists(names.workflow_bar_btn_postscan) == False, "Post scan button should be hidden before adding.")
     test.log("Verify buttons in scan view page")
     snooze(2)
     
@@ -128,9 +276,10 @@ def importData(filename, type, flag):
     
 #Check buttons with different types
 def checkButtonState(type):
-           
+    buttonsObj=waitForObject(names.catalogBar_buttons_RowLayout) #"id": "buttons"      
     if type == "orth":
-        test.verify(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")
+        #test.verify(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")#kun marked at 20210201
+        testVerifyIt([names.toolbar_btn_cut_GroupButton,names.scrollArea_toolbar_btn_cut_GroupButton], 'visible',True, "Cut button should be visible.")#kun add at 20210201
         test.verify(waitForObject(names.toolbar_btn_scan_area).visible == True, "Scan area button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_intraoral).visible == True, "Intraoral button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_lock).visible == True, "Lock button should be visible.")
@@ -146,7 +295,8 @@ def checkButtonState(type):
         test.log("Verify buttons for Orth data.")
     elif type == "restore":
         #test.verify(waitForObject(names.workflow_bar_btn_common).checked == False, "Common scan should be deselected.")
-        test.verify(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")
+        #test.verify(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")#kun marked at 20210201
+        testVerifyIt([names.toolbar_btn_cut_GroupButton,names.scrollArea_toolbar_btn_cut_GroupButton], 'visible',True, "Cut button should be visible.")#kun add at 20210201
         test.verify(waitForObject(names.toolbar_btn_freeze).visible == True, "Freeze button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_scan_history).visible == True, "Scan history button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_delete_all).visible == True, "Delete button should be visible.")
@@ -162,15 +312,22 @@ def checkButtonState(type):
             test.log("Verify buttons for postscan data.")
         else:
             #test.verify(waitForObject(names.workflow_bar_btn_impression).checked == False, "The impression button should be selected.")
-            test.verify(waitForObject(names.workflow_bar_btn_common).checked == True, "Common scan should be deselected.")
+            #test.verify(waitForObject(names.workflow_bar_btn_common).checked == True, "Common scan should be selected.")
+            btnCommon=getObjectByLayers(buttonsObj,[0])
+            testVerifyIt([btnCommon],'checked',True,"Common scan should be selected.")
+            #testVerifyIt([names.workflow_bar_btn_common,names.workflow_bar_btn_common1],'checked',True,"Common scan should be selected.")#kun add at 20210201
             test.log("Verify buttons for impression data.")
     elif type == "implant":
         snooze(2)
-        mouseClick(waitForObject(names.workflow_bar_btn_implant, 94506), 26, 24, Qt.LeftButton)
+        btnimplant=getObjectByLayers(buttonsObj,[4])
+        mouseClick(btnimplant,26, 24, Qt.LeftButton)
+        #mouseClick(waitForObject(objectExist([names.workflow_bar_btn_implant,names.workflow_bar_btn_implant1]), 94506), 26, 24, Qt.LeftButton) #Kun comment it at 20200204
+        
         snooze(2)
-        clickButton(waitForObject(names.workspace_Next_csButton))
+        clickButton(waitForObject(objectExist([names.workspace_Next_csButton,names.workspace_Next_csButton1])))
         snooze(2)
-        test.verify(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")
+        #test.verify(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")
+        testVerifyIt([names.toolbar_btn_cut_GroupButton,names.scrollArea_toolbar_btn_cut_GroupButton], 'visible',True, "Cut button should be visible.")#kun add at 20210201
         test.verify(waitForObject(names.toolbar_btn_freeze).visible == True, "Freeze button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_scanbody_area).visible == True, "Scanbody area button should be visible")
         test.verify(waitForObject(names.toolbar_btn_scan_history).visible == True, "Scan history button should be visible.")
@@ -238,7 +395,9 @@ def cutOnLowerJaw():
 
 # Refinement without shade matching
 def refineMesh(resolution):
-    mouseClick(waitForImage("..\\..\\..\\images\\checkButton.png"))
+    mouseClick(waitForObject(names.mainWindow_csStateButton_2))#Kun add at 20210129 check button
+    #mouseClick(waitForImage("..\\..\\..\\images\\checkButton.png"))#Kun mark it as comment at 20210129
+    
     snooze(2)
     
     if object.exists(names.btn_box_Yes_QPushButton):
@@ -264,7 +423,9 @@ def refineMesh(resolution):
         snooze(10)
         test.log("Wait for another 10s.")
     snooze(4)
-    test.compare(waitForObjectExists(names.scrollArea_toolbar_btn_cut_GroupButton).visible, True)
+    #test.compare(waitForObjectExists(names.scrollArea_toolbar_btn_cut_GroupButton).visible, True)
+    testVerifyIt([names.toolbar_btn_cut_GroupButton,names.scrollArea_toolbar_btn_cut_GroupButton], 'visible',True, "Cut button should be visible.")#kun add at 20210201
+        
     test.compare(waitForObjectExists(names.toolbar_btn_scan_area).visible, True)
     test.compare(waitForObjectExists(names.toolbar_btn_intraoral).visible, True)
     snooze(2)
@@ -275,7 +436,9 @@ def refineMesh(resolution):
 def checkAfterRefine(type):
     snooze(2)
     try:
-        test.verify(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")
+        buttonsObj=waitForObject(names.catalogBar_buttons_RowLayout) #"id": "buttons" 
+        #test.verify(waitForObject(names.scrollArea_toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")
+        testVerifyIt([names.toolbar_btn_cut_GroupButton,names.scrollArea_toolbar_btn_cut_GroupButton], 'visible',True, "Cut button should be visible.")#kun add at 20210201
         test.verify(waitForObject(names.toolbar_btn_scan_area).visible == True, "Scan area button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_intraoral).visible == True, "Intraoral button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_quadrant_snapshot).visible == True, "Quadrant button should be visible.")
@@ -284,11 +447,16 @@ def checkAfterRefine(type):
         test.verify(waitForObject(names.toolbar_btn_orientation_adjustment).visible == True, "Orientation button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_occlusion_pressure).visible == True, "Occlusion pressure button should be visible.")
         
-        test.verify(waitForObject(names.workflow_bar_btn_common).checked == True, "Common scan should be selected.")
+        #test.verify(waitForObject(names.workflow_bar_btn_common).checked == True, "Common scan should be selected.")
+        btnCommon=getObjectByLayers(buttonsObj,[0])
+        testVerifyIt([btnCommon],'checked',True,"Common scan should be selected.")
+        #testVerifyIt([names.workflow_bar_btn_common,names.workflow_bar_btn_common1],'checked',True,"Common scan should be selected.")#kun add common scan at 20210201
+    
         if type == "orth":
             #mouseClick(waitForImage("..\\..\\..\\images\\scrollUpButton.png"))
             snooze(2)
-            test.verify(waitForObject(names.toolbar_btn_margin_line).visible == True, "Margin line button should be visible.")
+            #test.verify(waitForObject(names.toolbar_btn_margin_line).visible == True, "Margin line button should be visible.")
+            testVerifyIt([names.toolbar_btn_margin_line,names.toolbar_btn_margin_line1],'visible',True,"Margin line button should be visible.")#kun add common scan at 20210201
             test.verify(waitForObject(names.toolbar_btn_undercut).visible == True, "Under cut button should be visible.")
             test.verify(waitForObject(names.toolbar_btn_parallelism_check).visible == True, "Parallelism button should be visible.")
             test.log("Verify buttons after refinement for Orth data.")
@@ -299,7 +467,7 @@ def checkAfterRefine(type):
                 #mouseClick(waitForImage("..\\..\\..\\images\\scrollUpButton.png"))
                 snooze(2)
                 test.verify(waitForObject(names.toolbar_btn_preparation_check).visible == True, "Preparation button should be visible.")
-                test.verify(waitForObject(names.toolbar_btn_margin_line).visible == True, "Margin line button should be visible.")
+                #testVerifyIt([names.toolbar_btn_margin_line,names.toolbar_btn_margin_line1],'visible',True,"Margin line button should be visible.")#kun add common scan at 20210201
                 test.verify(waitForObject(names.toolbar_btn_undercut).visible == True, "Under cut button should be visible.")
                 test.verify(waitForObject(names.toolbar_btn_parallelism_check).visible == True, "Parallelism button should be visible.")
                 test.verify(waitForObject(names.toolbar_btn_dual_view).visible == True, "Dual view button should be visible.")
@@ -307,7 +475,7 @@ def checkAfterRefine(type):
             else:
                 #mouseClick(waitForImage("..\\..\\..\\images\\scrollUpButton.png"))
                 snooze(2)
-                test.verify(waitForObject(names.toolbar_btn_margin_line).visible == True, "Margin line button should be visible.")
+                #testVerifyIt([names.toolbar_btn_margin_line,names.toolbar_btn_margin_line1],'visible',True,"Margin line button should be visible.")#kun add common scan at 20210201
                 test.verify(waitForObject(names.toolbar_btn_undercut).visible == True, "Under cut button should be visible.")
                 test.verify(waitForObject(names.toolbar_btn_parallelism_check).visible == True, "Parallelism button should be visible.")
                 test.log("Verify buttons for impression data.")
@@ -317,8 +485,11 @@ def checkAfterRefine(type):
             #test.verify(waitForObject(names.toolbar_btn_margin_line).visible == True, "Margin line button should be visible.")
             test.verify(waitForObject(names.toolbar_btn_undercut).visible == True, "Under cut button should be visible.")
             test.verify(waitForObject(names.toolbar_btn_parallelism_check).visible == True, "Parallelism button should be visible.")
-            test.verify(waitForObject(names.workflow_bar_btn_implant).visible == True, "Implant button should be visible after refinement.")       
-            test.verify(waitForObject(names.workflow_bar_btn_implant).checked == False, "Implant button should be shown and unchecked.")
+            #test.verify(waitForObject(names.workflow_bar_btn_implant).visible == True, "Implant button should be visible after refinement.")       
+            #test.verify(waitForObject(names.workflow_bar_btn_implant).checked == False, "Implant button should be shown and unchecked.")
+            btnimplant=getObjectByLayers(buttonsObj,[4])
+            testVerifyIt([btnimplant], 'visible', True, "Implant button should be visible after refinement.")#kun add common scan at 20210201
+            testVerifyIt([btnimplant], 'checked', False, "Implant button should be shown and unchecked.")#kun add common scan at 20210201
             test.log("Verify buttons for implant data.")
     except LookupError as e:
         test.log("Fail to find object: %s" % str(e))
@@ -531,6 +702,7 @@ def exportToDCM():
     test.log("Export data to DCM.")
 
 
+#Deprecated
 #Set a directory to save PLY or STL file
 def setDirectory(directory):
     snooze(3)
@@ -553,62 +725,163 @@ def setDirectory(directory):
     snooze(2)
 
 def countFolder(path):
+    """
     folders = []
     for folder in os.listdir(path):
         if os.path.isdir(os.path.join(path,folder)):
             folders.append(os.path.join(path,folder))
     return len(folders)
+    """
+    folderCount=0
+    for folder in os.listdir(path):
+        if os.path.isdir(os.path.join(path,folder)):
+            folderCount=folderCount+1
+    return folderCount
+    
+    
+def clickExport():
+    mouseClick(waitForObject(names.mainWindow_csStateButton))#kun add in 20210128 export
+    #mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\exportButton.png"))#Kun mark it as comment at 20210128
+    snooze(3)
+    
+def selectSaveTabOnExportDlg(path):
+    exportWidget=waitForObject(names.mainWindow_ExportWidget)
+    parentOfbuttonlist0=getObjectByLayers(exportWidget,[0,0,0])
+    flag=propsExists(object.children(parentOfbuttonlist0)[0],'id','button_list')
+    if not flag:
+        parentOfbuttonlist0=getObjectByLayers(exportWidget,[0,0,0,0])
+    btnListObj=getObjectByLayers(parentOfbuttonlist0,[0,0,3])
+    mouseClick(waitForObject(btnListObj))
+    #getItemInExportButtonList(btnListObj,3)#kun add in 20210202 save
+    #mouseClick(findImage("D:\\Eva\\acq_dallas_automation_test\\images\\saveButton.png"))#Kun mark it as comment at 20210128
+    snooze(3)
+    
+    savePageObj=getObjectByLayers(parentOfbuttonlist0,[1,0,1,0,0,2])#id = save_page
+    txtExportPath=getObjectByLayers(savePageObj,[0,1,1,0])#id=txtExportPath
+    targetDirectoryObj=waitForObject(txtExportPath)#Kun add in 20210129 Export Dlg->Save 
+    test.log(str(targetDirectoryObj.text).lower()) #debug...
+    if(str(targetDirectoryObj.text).lower() != path.lower()):
+        btnBrowseExportPath=getObjectByLayers(savePageObj,[0,1,1,1])#id=btnBrowseExportPath
+        mouseClick(waitForObject(btnBrowseExportPath))
+        snooze(2)
+        nativeType(path)
+        snooze(2)
+        nativeType("<Return>")
+        nativeType("<Return>")
+    
 
 #Export to stl or ply format
 def exportFile(format, type, path):
-    mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\exportButton.png"))
+    """
+    mouseClick(waitForObject(names.mainWindow_csStateButton))#kun add in 20210128 export
+    #mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\exportButton.png"))#Kun mark it as comment at 20210128
     snooze(3)
-    mouseClick(findImage("D:\\Eva\\acq_dallas_automation_test\\images\\saveButton.png"))
-    snooze(2)   
+    
+    mouseClick(waitForObject(names.button_list_Item_4))#kun add in 20210128 save
+    #mouseClick(findImage("D:\\Eva\\acq_dallas_automation_test\\images\\saveButton.png"))#Kun mark it as comment at 20210128
+    snooze(2) 
+    """  
+    
+    
+    exportWidget=waitForObject(names.mainWindow_ExportWidget)
+    
+    parentOfbuttonlist0=getObjectByLayers(exportWidget,[0,0,0])
+    flag=propsExists(object.children(parentOfbuttonlist0)[0], 'id','button_list')
+    if not flag:
+        parentOfbuttonlist0=getObjectByLayers(exportWidget,[0,0,0,0])
+    
+    savePageObj=getObjectByLayers(parentOfbuttonlist0,[1,0,1,0,0,2])#id = save_page
+    
     #Export format drop down list
     #mouseClick(waitForObject(names.cbExportFormat_StyleComboBox), 381, 28, Qt.LeftButton)
-    mouseClick(findImage("D:\\Eva\\acq_dallas_automation_test\\images\\dropDownIcon.png"))
+    #mouseClick(waitForObject(names.content_page_Rectangle))#kun add in 20210128 dropDownArraowButton
+
+    #mouseClick(findImage("D:\\Eva\\acq_dallas_automation_test\\images\\dropDownIcon.png"))#Kun mark it as comment at 20210128
     #mouseClick(waitForObject(names.o_Image), 15, 7, Qt.LeftButton)
+    
+    cbexportFormatObj=getObjectByLayers(savePageObj,[0,2,1])# exportFormat Rectangle
+    exportFormatTxtObj=getObjectByLayers(cbexportFormatObj,[2])
+    exportFormatTxt=str(exportFormatTxtObj.text)
+    test.log("display format:"+exportFormatTxt)
+    
+    arrowDownBtn=getObjectByLayers(cbexportFormatObj,[0])
     
     snooze(2)
     if "PLY" == format:
-        mouseClick(waitForObject(names.o_ItemDelegate), 262, 42, Qt.LeftButton)
+        if "STL" in exportFormatTxt:
+            mouseClick(arrowDownBtn, 15, 7, Qt.LeftButton)
+            mouseClick(arrowDownBtn, 15, 7, Qt.LeftButton)
+            snooze(1)
+            nativeMouseClick(262, 42, MouseButton.LeftButton)
+            pass
+        #mouseClick(waitForObject(names.o_ItemDelegate), 262, 42, Qt.LeftButton)
     elif "STL" == format:
-        mouseClick(waitForObject(names.o_ItemDelegate_2), 285, 34, Qt.LeftButton)
-    snooze(2)
+        if "PLY" in exportFormatTxt:
+            mouseClick(arrowDownBtn, 15, 7, Qt.LeftButton)
+            snooze(1)
+            nativeMouseClick(285, 34, MouseButton.LeftButton)
+            pass
+        #mouseClick(waitForOcrText("STL (Stereolithography File Format)"))
+        #mouseClick(waitForObject(names.o_ItemDelegate_2), 285, 34, Qt.LeftButton)
+    #snooze(2)
     
     #ClinicalIndication drop down list
     #mouseClick(waitForObject(names.cbExportClinicalIndication_StyleComboBox), 451, 41, Qt.LeftButton)
     snooze(2)
+    radioButtonObj=getObjectByLayers(savePageObj,[0,3,1])
     if "orth" == type:
         #mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\OrthType.png")) 
-        mouseClick(waitForObject(names.content_page_Orthodontics_StyleRadioButton), 90, 24, Qt.LeftButton)
+        orthodonticsRadioButton=getObjectByLayers(radioButtonObj,[0])
+        mouseClick(orthodonticsRadioButton)
+        #mouseClick(waitForObject(names.content_page_Orthodontics_StyleRadioButton), 90, 24, Qt.LeftButton)
     elif "restore" == type:
         #mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\RestoreType.png")) 
-        mouseClick(waitForObject(names.content_page_Restoration_StyleRadioButton), 78, 21, Qt.LeftButton)
+        estorationRadioButton=getObjectByLayers(radioButtonObj,[1])
+        mouseClick(estorationRadioButton)
+        #mouseClick(waitForObject(names.content_page_Restoration_StyleRadioButton), 78, 21, Qt.LeftButton)
     elif "implant" == type:
-        mouseClick(waitForObject(names.content_page_Implant_StyleRadioButton), 70, 21, Qt.LeftButton)
+        implantRadioButton=getObjectByLayers(radioButtonObj,[2])
+        mouseClick(implantRadioButton)
+        #mouseClick(waitForObject(names.content_page_Implant_StyleRadioButton), 70, 21, Qt.LeftButton)
     snooze(2)
+    currApp=currentApplicationContext()
     previousFolders = countFolder(path)
-    mouseClick(waitForObject(names.save_StyleButton), 70, 17, Qt.LeftButton)
-    snooze(7)
+    setApplicationContext(currApp)
+    savebtn=getObjectByLayers(parentOfbuttonlist0,[1,0,2,4])# save button
+    mouseClick(savebtn)#kun add in 20210128 click save button
+    #mouseClick(waitForObject(names.save_StyleButton), 70, 17, Qt.LeftButton)#Kun mark it as comment at 20210128
+    snooze(10)
+    currApp=currentApplicationContext()
     laterFolder = countFolder(path)
+    setApplicationContext(currApp)
+    test.log("laterFolder"+str(laterFolder)+"previousFolders"+str(previousFolders))
     test.verify(laterFolder == previousFolders + 1, "The folder count should be added 1.")
     while object.exists(names.processing_please_wait_StyleLabel):
         snooze(5)
-    mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\sendToButton.png"))
-    snooze(1)
-    mouseClick(waitForImage(r"D:\Eva\acq_dallas_automation_test\images\checkButton2.png"))
-    snooze(2)
+    
+    #btnListObjList=[]
+    #getObject(names.mainWindow_ExportWidget,'id','button_list',btnListObjList)
+    #getItemInExportButtonList(btnListObjList[0],0)#kun add in 20210201
+    #snooze(1)
+    #mouseClick(waitForImage("D:\\Eva\\acq_dallas_automation_test\\images\\sendToButton.png"))#Kun mark it as comment at 20210128
+    
+    
+    #mouseClick(waitForImage(r"D:\Eva\acq_dallas_automation_test\images\checkButton2.png"))#Kun mark it as comment at 20210128
+
 
 
 """Export STL or PLY files"""
 def export_STL_PLY(type, path):
-        
-    #Export to PLY format
-    exportFile("PLY", type, path)
+    clickExport()
+    selectSaveTabOnExportDlg(path)
+    
     #Export to STL format
     exportFile("STL", type, path)
+    
+    #Export to PLY format
+    exportFile("PLY", type, path)
+    test.log("finished export STL PLY files, checked in folder: "+path)
+    
     
     snooze(2)
 
@@ -648,10 +921,19 @@ def moveFile(source, dest, type):
 
 #Export to CSZ
 def exportToCSZ(path, name):
-    clickButton(waitForObject(names.mainWindow_button_menu_csButton))
-    snooze(1)
-    clickButton(waitForObject(names.mainMenu_Export_Raw_Data_csButton))
+    root_TitleBar=waitForObject(names.root_TitleBar)
+    menuButtonObj=getObjectByLayers(root_TitleBar,[3,3,0,0])  #scanflow version 1.0.3.1000
+    if not menuButtonObj:
+        menuButtonObj=getObjectByLayers(root_TitleBar,[2,2,0,0]) #scanflow version 1.0.3.600
+        
+    mouseClick(menuButtonObj, 31, 10, Qt.NoModifier, Qt.LeftButton)
+    #clickButton(waitForObject(objectExist([names.menuButton_StyleButton,names.mainWindow_button_menu_csButton]))) #kun comment at 20210204
     snooze(2)
+   
+    mouseClick(waitForObject(names.mainMenu_Export_Raw_Data_csButton), 88, 29, Qt.NoModifier, Qt.LeftButton)
+   
+    snooze(3)
+    
     filename = path + "\\" + name
     test.log("Saved CSZ name: %s" % filename)
     nativeType(filename)
@@ -662,6 +944,7 @@ def exportToCSZ(path, name):
         snooze(10)
         test.log("Waiting for exporting...")
     #Check whether the file exported successfully
+    snooze(2)
     fileCheck = os.path.isfile(filename)
     if fileCheck:
         test.passes("Export to CSZ file successfully.")
@@ -700,3 +983,11 @@ def killApp():
     subprocess.call([r'C:\auto_click_run\kill_io_3d_acq.exe.bat'])
     snooze(2)
     test.log("Kill ACQ application")
+    
+def skipInternalVersionDlg():
+    #Click ok button on the warn message which says it's an internal version
+    if object.exists(names.oK_StyleButton):
+        mouseClick(waitForObject(names.oK_StyleButton), 153, 30, Qt.LeftButton)
+        test.log("Application Under Testing is an internal version")
+        snooze(3)
+    

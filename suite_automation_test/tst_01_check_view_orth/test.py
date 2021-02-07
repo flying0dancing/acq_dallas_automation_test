@@ -7,8 +7,10 @@ file_type = "orth"
 def main():
     source(findFile("scripts", "common.py"))    
     startApplication(APPNAME)
-    mouseClick(waitForObject(names.oK_StyleButton), 153, 30, Qt.LeftButton)
-    snooze(3) 
+    snooze(1)
+    #Click ok button on the warn message which says it's an internal version
+    skipInternalVersionDlg()
+    
     mouseClick(UiTypes.ScreenPoint(410,950), Qt.NoModifier, Qt.LeftButton)
     snooze(2)
     #Import Orth data and check buttons on scan view

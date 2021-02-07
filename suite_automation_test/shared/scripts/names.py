@@ -3,6 +3,14 @@
 #Main window and workspace
 mainWindow_MainWindow = {"name": "MainWindow", "type": "MainWindow", "visible": 1}
 mainWindow_workspace_WorkSpace = {"name": "workspace", "type": "WorkSpace", "visible": 1, "window": mainWindow_MainWindow}
+workspace_CatalogBar_CatalogBar = { "name": "CatalogBar", "type": "CatalogBar", "visible": 1}
+mainWindow_CatalogBar_WorkFlowBar = {"leftWidget": workspace_CatalogBar_CatalogBar, "type": "WorkFlowBar", "unnamed": 1, "visible": 1, "window": mainWindow_MainWindow}
+mainWindow_ExportWidget = {"type": "ExportWidget", "unnamed": 1, "visible": 1, "window": mainWindow_MainWindow}
+mainWindow_QmlWidget = { "type": "QmlWidget", "unnamed": 1, "visible": 1, "window": mainWindow_MainWindow}
+mainWindow_QmlWidget_2 = {"occurrence": 2, "type": "QmlWidget", "unnamed": 1, "visible": 1, "window": mainWindow_MainWindow}
+
+workspace_QmlWidget = {"type": "QmlWidget", "unnamed": 1, "visible": 1,"container": mainWindow_workspace_WorkSpace }
+stepBar={"type": "StepBar", "unnamed": 1, "visible": 1, "window": mainWindow_MainWindow}
 
 #Login dialogue
 mainWindow_UserLoginDialog = {"type": "UserLoginDialog", "unnamed": 1, "visible": 1, "window": mainWindow_MainWindow}
@@ -14,7 +22,9 @@ password_PlaceholderText = {"container": o_QQuickView, "text": "Password", "type
 txtPassword_ImageTextField = {"container": o_QQuickView, "echoMode": 2, "id": "txtPassword", "passwordCharacter": "●", "type": "ImageTextField", "unnamed": 1, "visible": True}
 
 #Main menu
+root_TitleBar = {"container": mainWindow_QmlWidget, "id": "root", "type": "TitleBar", "unnamed": 1, "visible": True}
 mainWindow_button_menu_csButton = {"name": "button_menu", "type": "csButton", "visible": 1, "window": mainWindow_MainWindow}
+menuButton_StyleButton = {"checkable": False, "container": mainWindow_QmlWidget, "id": "menuButton", "type": "StyleButton", "unnamed": 1, "visible": True}
 mainMenu_MainMenu = {"name": "MainMenu", "type": "MainMenu", "visible": 1}
 mainMenu_Export_csButton = {"container": mainMenu_MainMenu, "text": "Export", "type": "csButton", "unnamed": 1, "visible": 1}
 mainMenu_Export_Raw_Data_csButton = {"container": mainMenu_MainMenu, "text": "    Export", "type": "csButton", "unnamed": 1, "visible": 1}
@@ -64,22 +74,27 @@ scan_StyleLabel = {"container": mainWindow_StartupScreen, "text": "Scan", "type"
 
 
 #Catalog buttons
-catalog_bar_btn_upper = {"container": mainWindow_workspace_WorkSpace, "name": "catalog_bar.btn_upper", "type": "csStateButton", "visible": 1}
-catalog_bar_btn_lower = {"container": mainWindow_workspace_WorkSpace, "name": "catalog_bar.btn_lower", "type": "csStateButton", "visible": 1}
-catalog_bar_btn_bite = {"container": mainWindow_workspace_WorkSpace, "name": "catalog_bar.btn_bite", "type": "csStateButton", "visible": 1}
-catalog_bar_btn_switch = {"container": mainWindow_workspace_WorkSpace, "name": "catalog_bar.btn_switch", "type": "csStateButton", "visible": 1}
+catalog_bar_btn_upper = { "name": "catalog_bar.btn_upper", "type": "csStateButton", "visible": 1}
+catalog_bar_btn_lower = { "name": "catalog_bar.btn_lower", "type": "csStateButton", "visible": 1}
+catalog_bar_btn_bite = { "name": "catalog_bar.btn_bite", "type": "csStateButton", "visible": 1}
+catalog_bar_btn_switch = { "name": "catalog_bar.btn_switch", "type": "csStateButton", "visible": 1}
 
 #Work flow bar buttons
 #workflow_bar_btn_common = {"container": mainWindow_workspace_WorkSpace, "name": "workflow_bar.btn_common", "type": "csStateButton", "visible": 1}
-workspace_CatalogBar_CatalogBar = {"container": mainWindow_workspace_WorkSpace, "name": "CatalogBar", "type": "CatalogBar", "visible": 1}
+
 workspace_CatalogBar_WorkFlowBar = {"container": mainWindow_workspace_WorkSpace, "leftWidget": workspace_CatalogBar_CatalogBar, "type": "WorkFlowBar", "unnamed": 1, "visible": 1}
-workflow_bar_btn_common = {"checkable": True, "container": workspace_CatalogBar_WorkFlowBar, "objectName": "workflow_bar.btn_common", "type": "StateButton", "visible": True}
+
+catalogBar_buttons_RowLayout = {"container": mainWindow_CatalogBar_WorkFlowBar, "id": "buttons", "type": "RowLayout", "unnamed": 1, "visible": True}
+workflow_bar_btn_common1={"container": mainWindow_CatalogBar_WorkFlowBar, "objectName": "workflow_bar.btn_common", "type": "StateButton", "visible": True}
+workflow_bar_btn_common={"checkable": True, "container": mainWindow_CatalogBar_WorkFlowBar, "objectName": "workflow_bar.btn_common", "type": "StateButton", "visible": True}
 
 
-workflow_bar_btn_cut_hole = {"checkable": True, "container": workspace_CatalogBar_WorkFlowBar, "objectName": "workflow_bar.btn_cut", "type": "csStateButton", "visible": 1}
-workflow_bar_btn_implant = {"checkable": True, "container": workspace_CatalogBar_WorkFlowBar, "objectName": "workflow_bar.btn_implant", "type": "StateButton", "visible": True}
+workflow_bar_btn_cut_hole = {"checkable": True,  "objectName": "workflow_bar.btn_cut", "type": "csStateButton", "visible": 1}
+workflow_bar_btn_implant = {"checkable": True, "objectName": "workflow_bar.btn_implant", "type": "StateButton", "visible": True}
+workflow_bar_btn_implant1 = {"checkable": True, "container": mainWindow_CatalogBar_WorkFlowBar, "objectName": "workflow_bar.btn_implant", "type": "StateButton", "visible": True}
+
 workspace_Next_csButton = {"container": mainWindow_workspace_WorkSpace, "text": "Next", "type": "csButton", "unnamed": 1, "visible": 1}
-
+workspace_Next_csButton1 = {"text": "Next", "type": "csButton", "unnamed": 1, "visible": 1, "window": mainWindow_MainWindow}
 workflow_bar_btn_impression = {"checkable": True, "container": workspace_CatalogBar_WorkFlowBar, "objectName": "workflow_bar.btn_impression", "type": "csStateButton", "visible": 1}
 
 workflow_bar_btn_postscan = {"checkable": True, "container": workspace_CatalogBar_WorkFlowBar, "objectName": "workflow_bar.btn_preparation", "type": "StateButton", "visible": True}
@@ -90,33 +105,48 @@ general_increase_csButton = {"checkable": True, "container": workspace_CatalogBa
 #Toolbar buttons, relative position = (36, 42)
 #toolbar_btn_cut = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_cut", "type": "csStateButton", "visible": 1}
 workspace_ScrollArea_QScrollArea = {"container": mainWindow_workspace_WorkSpace, "name": "ScrollArea", "type": "QScrollArea", "visible": 1}
-scrollArea_toolbar_btn_cut_GroupButton = {"container": workspace_ScrollArea_QScrollArea, "name": "toolbar.btn_cut", "type": "GroupButton", "visible": 1}
+
 scrollArea_toolbar_btn_freecut_GroupButton = {"container": workspace_ScrollArea_QScrollArea, "name": "toolbar.btn_freecut", "type": "GroupButton", "visible": 1}
 
+toolbar_btn_cut_GroupButton = { "name": "toolbar.btn_cut", "type": "GroupButton", "visible": 1}
+toolbar_btn_scan_area = { "name": "toolbar.btn_scan_area", "type": "csStateButton", "visible": 1}
+toolbar_btn_intraoral = { "name": "toolbar.btn_intraoral", "type": "csStateButton", "visible": 1}
+toolbar_btn_intraoral1 = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_intraoral", "type": "csStateButton", "visible": 1}
+toolbar_btn_impression_brush = {"name": "toolbar.btn_impression_brush", "type": "csStateButton", "visible": 1}
+toolbar_btn_impression_brush1 = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_impression_brush", "type": "csStateButton", "visible": 1}
+toolbar_btn_lock = { "name": "toolbar.btn_lock", "type": "csStateButton", "visible": 1}
+toolbar_btn_freeze = { "name": "toolbar.btn_freeze", "type": "csStateButton", "visible": 1}
+toolbar_btn_scan_history = {"name": "toolbar.btn_scan_history", "type": "csStateButton", "visible": 1}
+toolbar_btn_delete_all = {"name": "toolbar.btn_delete_all", "type": "csStateButton", "visible": 1}
+toolbar_btn_freecut = { "name": "toolbar.btn_freecut", "type": "csStateButton", "visible": 1}
+toolbar_btn_circlecut = { "name": "toolbar.btn_circlecut", "type": "csStateButton", "visible": 1}
+toolbar_btn_restore = { "name": "toolbar.btn_restore", "type": "csStateButton", "visible": 1}
+toolbar_btn_reset = { "name": "toolbar.btn_reset", "type": "csStateButton", "visible": 1}
+toolbar_btn_scanbody_area = { "name": "toolbar.btn_scanbody_area", "type": "csStateButton", "visible": 1}
+toolbar_toolbar_scan_body_area_selection = { "name": "toolbar/toolbar_scan_body_area_selection", "type": "csButton", "visible": 1}
+toolbar_toolbar_scan_body_area_selection1 = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar/toolbar_scan_body_area_selection", "type": "csButton", "visible": 1}
 
-toolbar_btn_scan_area = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_scan_area", "type": "csStateButton", "visible": 1}
-toolbar_btn_intraoral = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_intraoral", "type": "csStateButton", "visible": 1}
-toolbar_btn_impression_brush = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_impression_brush", "type": "csStateButton", "visible": 1}
-toolbar_btn_lock = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_lock", "type": "csStateButton", "visible": 1}
-toolbar_btn_freeze = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_freeze", "type": "csStateButton", "visible": 1}
-toolbar_btn_scan_history = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_scan_history", "type": "csStateButton", "visible": 1}
-toolbar_btn_delete_all = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_delete_all", "type": "csStateButton", "visible": 1}
-toolbar_btn_freecut = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_freecut", "type": "csStateButton", "visible": 1}
-toolbar_btn_circlecut = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_circlecut", "type": "csStateButton", "visible": 1}
-toolbar_btn_restore = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_restore", "type": "csStateButton", "visible": 1}
-toolbar_btn_reset = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_reset", "type": "csStateButton", "visible": 1}
-toolbar_btn_scanbody_area = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_scanbody_area", "type": "csStateButton", "visible": 1}
-toolbar_toolbar_scan_body_area_selection = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar/toolbar_scan_body_area_selection", "type": "csButton", "visible": 1}
 #Added toolbar buttons in check view
-toolbar_btn_quadrant_snapshot = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_quadrant_snapshot", "type": "csStateButton", "visible": 1}
-toolbar_btn_transparency = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_transparency", "type": "csStateButton", "visible": 1}
-toolbar_btn_measurement = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_measurement", "type": "csStateButton", "visible": 1}
+toolbar_btn_quadrant_snapshot = {"name": "toolbar.btn_quadrant_snapshot", "type": "csStateButton", "visible": 1}
+toolbar_btn_transparency = { "name": "toolbar.btn_transparency", "type": "csStateButton", "visible": 1}
+toolbar_btn_measurement = { "name": "toolbar.btn_measurement", "type": "csStateButton", "visible": 1}
 #toolbar_btn_orientation_adjustment = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_orientation_adjustment", "type": "csStateButton", "visible": 1}
-toolbar_btn_orientation_adjustment = {"container": workspace_ScrollArea_QScrollArea, "name": "toolbar.btn_orientation_adjustment", "type": "GroupButton", "visible": 1}
-toolbar_btn_occlusion_pressure = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_occlusion_pressure", "type": "csStateButton", "visible": 1}
-toolbar_btn_restoration = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_restoration", "type": "csStateButton", "visible": 1}
-toolbar_btn_shade_matching = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_shade_matching", "type": "csStateButton", "visible": 1}
-toolbar_btn_manual_bite_adjustment = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_manual_bite_adjustment", "type": "csStateButton", "visible": 1}
+toolbar_btn_orientation_adjustment = { "name": "toolbar.btn_orientation_adjustment", "type": "GroupButton", "visible": 1}
+toolbar_btn_occlusion_pressure = {"name": "toolbar.btn_occlusion_pressure", "type": "csStateButton", "visible": 1}
+toolbar_btn_restoration = { "name": "toolbar.btn_restoration", "type": "csStateButton", "visible": 1}
+toolbar_btn_shade_matching = {"name": "toolbar.btn_shade_matching", "type": "csStateButton", "visible": 1}
+toolbar_btn_manual_bite_adjustment = { "name": "toolbar.btn_manual_bite_adjustment", "type": "csStateButton", "visible": 1}
+
+#Added toolbar buttons in check view same
+toolbar_btn_quadrant_snapshot1 = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_quadrant_snapshot", "type": "csStateButton", "visible": 1}
+toolbar_btn_transparency1 = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_transparency", "type": "csStateButton", "visible": 1}
+toolbar_btn_measurement1 = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_measurement", "type": "csStateButton", "visible": 1}
+#toolbar_btn_orientation_adjustment = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_orientation_adjustment", "type": "csStateButton", "visible": 1}
+toolbar_btn_orientation_adjustment1 = {"container": workspace_ScrollArea_QScrollArea, "name": "toolbar.btn_orientation_adjustment", "type": "GroupButton", "visible": 1}
+toolbar_btn_occlusion_pressure1 = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_occlusion_pressure", "type": "csStateButton", "visible": 1}
+toolbar_btn_restoration1 = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_restoration", "type": "csStateButton", "visible": 1}
+toolbar_btn_shade_matching1 = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_shade_matching", "type": "csStateButton", "visible": 1}
+toolbar_btn_manual_bite_adjustment1 = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_manual_bite_adjustment", "type": "csStateButton", "visible": 1}
 
 
 #Toolbar buttons under cut in scan view
@@ -139,35 +169,63 @@ toolbar_btn_manual_bite_adjustment = {"container": mainWindow_workspace_WorkSpac
 
 
 #Resolution type buttons
-workspace_refine_view_resolution_frame_QFrame = {"container": mainWindow_workspace_WorkSpace, "name": "refine_view_resolution_frame", "type": "QFrame", "visible": 1}
-refine_view_resolution_frame_button_resolution_low_csButton = {"container": workspace_refine_view_resolution_frame_QFrame, "name": "button_resolution_low", "type": "csButton", "visible": 1}
-refine_view_resolution_frame_button_resolution_standard_csButton = {"container": workspace_refine_view_resolution_frame_QFrame, "name": "button_resolution_standard", "type": "csButton", "visible": 1}
-refine_view_resolution_frame_button_resolution_high_csButton = {"container": workspace_refine_view_resolution_frame_QFrame, "name": "button_resolution_high", "type": "csButton", "visible": 1}
+workspace_refine_view_resolution_frame_QFrame = { "name": "refine_view_resolution_frame", "type": "QFrame", "visible": 1}
+refine_view_resolution_frame_button_resolution_low_csButton = {"name": "button_resolution_low", "type": "csButton", "visible": 1}
+refine_view_resolution_frame_button_resolution_standard_csButton = { "name": "button_resolution_standard", "type": "csButton", "visible": 1}
+refine_view_resolution_frame_button_resolution_high_csButton = { "name": "button_resolution_high", "type": "csButton", "visible": 1}
+#Resolution type buttons
+workspace_refine_view_resolution_frame_QFrame1 = {"container": mainWindow_workspace_WorkSpace, "name": "refine_view_resolution_frame", "type": "QFrame", "visible": 1}
+refine_view_resolution_frame_button_resolution_low_csButton1 = {"container": workspace_refine_view_resolution_frame_QFrame, "name": "button_resolution_low", "type": "csButton", "visible": 1}
+refine_view_resolution_frame_button_resolution_standard_csButton1 = {"container": workspace_refine_view_resolution_frame_QFrame, "name": "button_resolution_standard", "type": "csButton", "visible": 1}
+refine_view_resolution_frame_button_resolution_high_csButton1 = {"container": workspace_refine_view_resolution_frame_QFrame, "name": "button_resolution_high", "type": "csButton", "visible": 1}
 
 
 #Refine button and cancel button
-workspace_refine_view_button_frame_QFrame = {"container": mainWindow_workspace_WorkSpace, "name": "refine_view_button_frame", "type": "QFrame", "visible": 1}
-workspace_progress_view_button_frame_QFrame = {"container": mainWindow_workspace_WorkSpace, "name": "progress_view_button_frame", "type": "QFrame", "visible": 1}
-refine_view_button_frame_button_refine_DelayButton = {"container": workspace_refine_view_button_frame_QFrame, "name": "button_refine", "type": "DelayButton", "visible": 1}
-refine_view_button_frame_button_cancel = {"container": workspace_refine_view_button_frame_QFrame, "name": "button_cancel", "type": "QPushButton", "visible": 1}
-progress_view_button_cancel_progress = {"container": workspace_progress_view_button_frame_QFrame, "name": "button_cancel_progress", "type": "QPushButton", "visible": 1}
+workspace_refine_view_button_frame_QFrame = { "name": "refine_view_button_frame", "type": "QFrame", "visible": 1}
+workspace_progress_view_button_frame_QFrame = { "name": "progress_view_button_frame", "type": "QFrame", "visible": 1}
+refine_view_button_frame_button_refine_DelayButton = {"name": "button_refine", "type": "DelayButton", "visible": 1}
+refine_view_button_frame_button_cancel = {"name": "button_cancel", "type": "QPushButton", "visible": 1}
+progress_view_button_cancel_progress = {"name": "button_cancel_progress", "type": "QPushButton", "visible": 1}
+#Refine button and cancel button
+workspace_refine_view_button_frame_QFrame1 = {"container": mainWindow_workspace_WorkSpace, "name": "refine_view_button_frame", "type": "QFrame", "visible": 1}
+workspace_progress_view_button_frame_QFrame1 = {"container": mainWindow_workspace_WorkSpace, "name": "progress_view_button_frame", "type": "QFrame", "visible": 1}
+refine_view_button_frame_button_refine_DelayButton1 = {"container": workspace_refine_view_button_frame_QFrame, "name": "button_refine", "type": "DelayButton", "visible": 1}
+refine_view_button_frame_button_cancel1 = {"container": workspace_refine_view_button_frame_QFrame, "name": "button_cancel", "type": "QPushButton", "visible": 1}
+progress_view_button_cancel_progress1 = {"container": workspace_progress_view_button_frame_QFrame, "name": "button_cancel_progress", "type": "QPushButton", "visible": 1}
 
 
 #Buttons under restoration tool
-toolbar_btn_preparation_check = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_preparation_check", "type": "csStateButton", "visible": 1}
+toolbar_btn_preparation_check = { "name": "toolbar.btn_preparation_check", "type": "csStateButton", "visible": 1}
 #toolbar_btn_margin_line = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_margin_line", "type": "csStateButton", "visible": 1}
-toolbar_btn_margin_line = {"container": workspace_ScrollArea_QScrollArea, "name": "toolbar.btn_margin_line", "type": "GroupButton", "visible": 1}
-toolbar_btn_undercut = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_undercut", "type": "csStateButton", "visible": 1}
+toolbar_btn_margin_line = { "name": "toolbar.btn_margin_line", "type": "GroupButton", "visible": 1}
+toolbar_btn_undercut = { "name": "toolbar.btn_undercut", "type": "csStateButton", "visible": 1}
 #parallelism button on scan view
-toolbar_btn_parallelism_check = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_parallelism_check", "type": "csStateButton", "visible": 1}
-toolbar_btn_dual_view = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_dual_view", "type": "csStateButton", "visible": 1}
+toolbar_btn_parallelism_check = {"name": "toolbar.btn_parallelism_check", "type": "csStateButton", "visible": 1}
+toolbar_btn_dual_view = {"name": "toolbar.btn_dual_view", "type": "csStateButton", "visible": 1}
 #Buttons under margin line buttons
-toolbar_auto_margin_line = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar_auto_margin_line", "type": "csButton", "visible": 1}
-toolbar_manual_margin_line = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar_manual_margin_line", "type": "csButton", "visible": 1}
-toolbar_edit_margin_line = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar_edit_margin_line", "type": "csButton", "visible": 1}
-toolbar_delete = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar_delete", "type": "csButton", "visible": 1}
-general_general_restore = {"container": mainWindow_workspace_WorkSpace, "name": "general/general_restore", "type": "csButton", "visible": 1}
-general_general_reset = {"container": mainWindow_workspace_WorkSpace, "name": "general/general_reset", "type": "csButton", "visible": 1}
+toolbar_auto_margin_line = {"name": "toolbar_auto_margin_line", "type": "csButton", "visible": 1}
+toolbar_manual_margin_line = {"name": "toolbar_manual_margin_line", "type": "csButton", "visible": 1}
+toolbar_edit_margin_line = {"name": "toolbar_edit_margin_line", "type": "csButton", "visible": 1}
+toolbar_delete = { "name": "toolbar_delete", "type": "csButton", "visible": 1}
+general_general_restore = { "name": "general/general_restore", "type": "csButton", "visible": 1}
+general_general_reset = { "name": "general/general_reset", "type": "csButton", "visible": 1}
+
+#Buttons under restoration tool
+toolbar_btn_preparation_check1 = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_preparation_check", "type": "csStateButton", "visible": 1}
+#toolbar_btn_margin_line1 = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_margin_line", "type": "csStateButton", "visible": 1}
+toolbar_btn_margin_line1 = {"container": workspace_ScrollArea_QScrollArea, "name": "toolbar.btn_margin_line", "type": "GroupButton", "visible": 1}
+toolbar_btn_undercut1 = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_undercut", "type": "csStateButton", "visible": 1}
+#parallelism button on scan view
+toolbar_btn_parallelism_check1 = {"container": mainWindow_workspace_WorkSpace,"name": "toolbar.btn_parallelism_check", "type": "csStateButton", "visible": 1}
+toolbar_btn_dual_view1 = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_dual_view", "type": "csStateButton", "visible": 1}
+#Buttons under margin line buttons
+toolbar_auto_margin_line1 = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar_auto_margin_line", "type": "csButton", "visible": 1}
+toolbar_manual_margin_line1 = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar_manual_margin_line", "type": "csButton", "visible": 1}
+toolbar_edit_margin_line1 = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar_edit_margin_line", "type": "csButton", "visible": 1}
+toolbar_delete1 = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar_delete", "type": "csButton", "visible": 1}
+general_general_restore1 = {"container": mainWindow_workspace_WorkSpace, "name": "general/general_restore", "type": "csButton", "visible": 1}
+general_general_reset1 = {"container": mainWindow_workspace_WorkSpace, "name": "general/general_reset", "type": "csButton", "visible": 1}
+
 
 #Tooth number for adults: European standard
 workspace_11_QPushButton = {"container": mainWindow_workspace_WorkSpace, "name": 11, "type": "QPushButton", "visible": 1} #8 for American STD
@@ -225,14 +283,24 @@ workspace_84_QPushButton = {"container": mainWindow_workspace_WorkSpace, "name":
 workspace_85_QPushButton = {"container": mainWindow_workspace_WorkSpace, "name": 85, "type": "QPushButton", "visible": 1} #T for American STD
 
 #Toolbar buttons under Adapt menu
-toolbar_btn_mesh_cleaning = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_mesh_cleaning", "type": "csStateButton", "visible": 1}
-toolbar_btn_mesh_closure = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_mesh_closure", "type": "csStateButton", "visible": 1}
+toolbar_btn_mesh_cleaning = { "name": "toolbar.btn_mesh_cleaning", "type": "csStateButton", "visible": 1}
+toolbar_btn_mesh_closure = {"name": "toolbar.btn_mesh_closure", "type": "csStateButton", "visible": 1}
 #toolbar_btn_bracket_removal = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_bracket_removal", "type": "csStateButton", "visible": 1}
-toolbar_btn_plane_cut = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_plane_cut", "type": "csStateButton", "visible": 1}
-workspace_QtQuickWidget = {"container": mainWindow_workspace_WorkSpace, "type": "QtQuickWidget", "unnamed": 1, "visible": 1}
+toolbar_btn_plane_cut = {"name": "toolbar.btn_plane_cut", "type": "csStateButton", "visible": 1}
+workspace_QtQuickWidget = {"type": "QtQuickWidget", "unnamed": 1, "visible": 1}
 #workspace_VTKMeshWidget = {"container": mainWindow_workspace_WorkSpace, "type": "VTKMeshWidget", "unnamed": 1, "visible": 1}
-scrollArea_toolbar_btn_cut_GroupButton = {"container": workspace_ScrollArea_QScrollArea, "name": "toolbar.btn_cut", "type": "GroupButton", "visible": 1}
-scrollArea_toolbar_btn_mesh_cleaning_GroupButton = {"container": workspace_ScrollArea_QScrollArea, "name": "toolbar.btn_mesh_cleaning", "type": "GroupButton", "visible": 1}
+scrollArea_toolbar_btn_cut_GroupButton = {"name": "toolbar.btn_cut", "type": "GroupButton", "visible": 1}
+scrollArea_toolbar_btn_mesh_cleaning_GroupButton = {"name": "toolbar.btn_mesh_cleaning", "type": "GroupButton", "visible": 1}
+
+#Toolbar buttons under Adapt menu
+toolbar_btn_mesh_cleaning1 = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_mesh_cleaning", "type": "csStateButton", "visible": 1}
+toolbar_btn_mesh_closure1 = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_mesh_closure", "type": "csStateButton", "visible": 1}
+#toolbar_btn_bracket_removal = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_bracket_removal", "type": "csStateButton", "visible": 1}
+toolbar_btn_plane_cut1 = {"container": mainWindow_workspace_WorkSpace, "name": "toolbar.btn_plane_cut", "type": "csStateButton", "visible": 1}
+workspace_QtQuickWidget1 = {"container": mainWindow_workspace_WorkSpace, "type": "QtQuickWidget", "unnamed": 1, "visible": 1}
+#workspace_VTKMeshWidget = {"container": mainWindow_workspace_WorkSpace, "type": "VTKMeshWidget", "unnamed": 1, "visible": 1}
+scrollArea_toolbar_btn_cut_GroupButton1 = {"container": workspace_ScrollArea_QScrollArea, "name": "toolbar.btn_cut", "type": "GroupButton", "visible": 1}
+scrollArea_toolbar_btn_mesh_cleaning_GroupButton1 = {"container": workspace_ScrollArea_QScrollArea, "name": "toolbar.btn_mesh_cleaning", "type": "GroupButton", "visible": 1}
 
 
 #Sliders under mesh cleaning tools
@@ -270,7 +338,7 @@ btnBrowseExportPath_StyleButton = {"checkable": False, "container": o_ExportPage
 #Drop down list for export format
 o_Image = {"container": o_ExportPage_2, "source": "qrc:///image/general/general_combobox_down_dark.svg", "type": "Image", "unnamed": 1, "visible": True}
 #o_Overlay = {"container": workspace_QtQuickWidget, "type": "Overlay", "unnamed": 1, "visible": True}
-workspace_QmlWidget = {"container": mainWindow_workspace_WorkSpace, "type": "QmlWidget", "unnamed": 1, "visible": 1}
+
 o_Overlay = {"container": workspace_QmlWidget, "type": "Overlay", "unnamed": 1, "visible": True}
 cbExportFormat_StyleComboBox = {"container": o_ExportPage_2, "id": "cbExportFormat", "type": "StyleComboBox", "unnamed": 1, "visible": True}
 
@@ -306,14 +374,46 @@ processing_please_wait_StyleLabel = {"container": mainWindow_BusyDialog, "text":
 scrollView_ScrollView = {"container": workspace_QtQuickWidget, "id": "scrollView", "type": "ScrollView", "unnamed": 1, "visible": True}
 scrollView_cbExportFormat_StyleComboBox = {"container": scrollView_ScrollView, "id": "cbExportFormat", "type": "StyleComboBox", "unnamed": 1, "visible": True}
 
-workspace_QmlWidget = {"container": mainWindow_workspace_WorkSpace, "type": "QmlWidget", "unnamed": 1, "visible": 1}
+
 content_page_SwipeView = {"container": workspace_QmlWidget, "id": "content_page", "type": "SwipeView", "unnamed": 1, "visible": True}
+content_page_SwipeView1 = {"container": mainWindow_QmlWidget, "id": "content_page", "type": "SwipeView", "unnamed": 1, "visible": True}
+
+#objectExist
 content_page_Orthodontics_StyleRadioButton = {"checkable": True, "container": content_page_SwipeView, "occurrence": 3, "text": "Orthodontics", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
 content_page_Restoration_StyleRadioButton = {"checkable": True, "container": content_page_SwipeView, "occurrence": 3, "text": "Restoration", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
 content_page_Implant_StyleRadioButton = {"checkable": True, "container": content_page_SwipeView, "occurrence": 3, "text": "Implant", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
 
+#content_page_Orthodontics_StyleRadioButton1 = {"checkable": True, "container": content_page_SwipeView2, "occurrence": 3, "text": "Orthodontics", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
+#content_page_Restoration_StyleRadioButton1 = {"checkable": True, "container": content_page_SwipeView2, "occurrence": 3, "text": "Restoration", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
+#content_page_Implant_StyleRadioButton1 = {"checkable": True, "container": content_page_SwipeView2, "occurrence": 3, "text": "Implant", "type": "StyleRadioButton", "unnamed": 1, "visible": True}
+
+
 save_StyleButton = {"container": workspace_QmlWidget, "occurrence": 2, "text": "Save", "type": "Text", "unnamed": 1, "visible": True}
 save_and_Exit_StyleButton = save_and_Exit_Text = {"container": workspace_QmlWidget, "text": "Save and Exit", "type": "Text", "unnamed": 1, "visible": True}
 cancel_StyleButton = {"container": workspace_QmlWidget, "text": "Cancel", "type": "Text", "unnamed": 1, "visible": True}
+o_SystemTray = {"type": "SystemTray"}
+
+#Export Button list
+#Deprecated
+#button_list_ListView = {"container": workspace_QmlWidget, "id": "button_list", "type": "ListView", "unnamed": 1, "visible": True}
+#button_list_ListView1 = {"container": mainWindow_QmlWidget, "id": "button_list", "type": "ListView", "unnamed": 1, "visible": True}
 
 
+
+#Save Tab Target folder
+content_page_txtExportPath_StyleTextField = { "container": content_page_SwipeView,"echoMode": 0, "id": "txtExportPath", "type": "StyleTextField", "unnamed": 1, "visible": True}
+#content_page_txtExportPath_StyleTextField1 = {"backgroundcolor": "#f6f4f4", "container": content_page_SwipeView_2, "echoMode": 0, "id": "txtExportPath", "type": "StyleTextField", "unnamed": 1, "visible": True}
+
+#content_page_btnBrowseExportPath_StyleButton = {"container": content_page_SwipeView,"checkable": False, "id": "btnBrowseExportPath", "type": "StyleButton", "unnamed": 1, "visible": True}
+#content_page_btnBrowseExportPath_StyleButton1 = {"container": content_page_SwipeView_2,"checkable": False, "id": "btnBrowseExportPath", "type": "StyleButton", "unnamed": 1, "visible": True}
+
+
+
+
+mainWindow_csStateButton = {"occurrence": 4, "type": "csStateButton", "unnamed": 1, "visible": 1, "window": mainWindow_MainWindow}
+
+o_RowLayout = {"container": workspace_QmlWidget, "occurrence": 19, "type": "RowLayout", "unnamed": 1, "visible": True}
+content_page_Rectangle_2 = {"container": content_page_SwipeView, "occurrence": 47, "type": "Rectangle", "unnamed": 1, "visible": True}
+mainWindow_csStateButton_2 = {"occurrence": 2, "type": "csStateButton", "unnamed": 1, "visible": 1, "window": mainWindow_MainWindow}
+mainWindow_csStateButton_3 = {"type": "csStateButton", "unnamed": 1, "visible": 1, "window": mainWindow_MainWindow}
+mainWindow_csStateButton_4 = {"occurrence": 3, "type": "csStateButton", "unnamed": 1, "visible": 1, "window": mainWindow_MainWindow}
