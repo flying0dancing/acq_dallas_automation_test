@@ -172,7 +172,7 @@ def propsExists(obj,propName,propValue):
         #test.log("............................find prop "+propName)
         if propsO[propName]==propValue:
             flag=True
-            test.log("............................getIt %s = %s" % (propName, propsO[propName]))
+            #test.log("............................getIt %s = %s" % (propName, propsO[propName]))
     return flag
 
 # find item by id, type...using parent object
@@ -218,6 +218,7 @@ def scanViewButtonsCheck():
     if object.exists(names.continue_without_signing_in_Text):
         mouseClick(waitForObject(names.continue_without_signing_in_Text))
         snooze(2)
+    recoverDataDlg()
     mouseClick(waitForObject(names.scan_StyleLabel))
     snooze(5)
     test.verify(waitForObject(names.toolbar_btn_cut_GroupButton).visible == True, "Cut button should be visible.")
@@ -1035,7 +1036,7 @@ def recoverDataDlg():
         return
     msgDlg=waitForObject(names.o_MessageDialog)
     msgContent=getObjectByLayers(msgDlg,[0,0,0,0,1])
-    msgTitle=getObjectByLayers(msgDlg,[1])
+    msgTitle=getObjectByLayers(msgContent,[1])
     if(str(msgTitle.text) == 'Recover Data'):
         msgCancelBtn=getObjectByLayers(msgContent,[4,0,0])
         mouseClick(msgCancelBtn) 
