@@ -417,3 +417,6 @@ content_page_Rectangle_2 = {"container": content_page_SwipeView, "occurrence": 4
 mainWindow_csStateButton_2 = {"occurrence": 2, "type": "csStateButton", "unnamed": 1, "visible": 1, "window": mainWindow_MainWindow}
 mainWindow_csStateButton_3 = {"type": "csStateButton", "unnamed": 1, "visible": 1, "window": mainWindow_MainWindow}
 mainWindow_csStateButton_4 = {"occurrence": 3, "type": "csStateButton", "unnamed": 1, "visible": 1, "window": mainWindow_MainWindow}
+buttons_ListView = {"container": o_QmlWidget, "id": "buttons", "type": "ListView", "unnamed": 1, "visible": True}
+buttons_Cancel_StyleButton = {"checkable": True, "container": buttons_ListView, "text": "Cancel", "type": "StyleButton", "unnamed": 1, "visible": True}
+cancel_Cancel_Text = {"container": buttons_Cancel_StyleButton, "text": "Cancel", "type": "Text", "unnamed": 1, "visible": True}

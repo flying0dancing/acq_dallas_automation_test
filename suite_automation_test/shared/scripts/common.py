@@ -269,6 +269,9 @@ def scanViewButtonsCheck():
 def importData(filename, type, flag):
     #clickButton(waitForObject(names.btn_box_OK_QPushButton))    
     snooze(5)
+
+    recoverDataDlg()
+
     if object.exists(names.continue_without_signing_in_Text):
         mouseClick(waitForObject(names.continue_without_signing_in_Text))
         snooze(2)
@@ -516,6 +519,7 @@ def checkAfterRefine(type):
             test.log("Verify buttons for implant data.")
     except LookupError as e:
         test.log("Fail to find object: %s" % str(e))
+
         
 #Refinement with shade matching info
 def refineMeshWithShade(resolution):
@@ -1025,4 +1029,15 @@ def skipInternalVersionDlg():
         mouseClick(waitForObject(names.oK_StyleButton), 153, 30, Qt.LeftButton)
         test.log("Application Under Testing is an internal version")
         snooze(3)
-    
+
+def recoverDataDlg():
+    if not object.exists(names.o_MessageDialog):
+        return
+    msgDlg=waitForObject(names.o_MessageDialog)
+    msgContent=getObjectByLayers(msgDlg,[0,0,0,0,1])
+    msgTitle=getObjectByLayers(msgDlg,[1])
+    if(str(msgTitle.text) == 'Recover Data'):
+        msgCancelBtn=getObjectByLayers(msgContent,[4,0,0])
+        mouseClick(msgCancelBtn) 
+        snooze(3)
+        
