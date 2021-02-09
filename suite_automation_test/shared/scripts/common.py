@@ -299,6 +299,7 @@ def importData(filename, type, flag):
     
 #Check buttons with different types
 def checkButtonState(type):
+    snooze(1)
     buttonsObj=waitForObject(names.catalogBar_buttons_RowLayout) #"id": "buttons"   
     btnpreparation=getObjectByProperty(buttonsObj,'objectName','workflow_bar.btn_preparation')   
     if type == "orth":
