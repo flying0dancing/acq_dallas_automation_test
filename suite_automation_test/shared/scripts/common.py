@@ -776,10 +776,14 @@ def clickExport():
 def selectSaveTabOnExportDlg(path):
     exportWidget=waitForObject(names.mainWindow_ExportWidget)
     parentOfbuttonlist0=getObjectByLayers(exportWidget,[0,0,0])
-    flag=propsExists(object.children(parentOfbuttonlist0)[0],'id','button_list')
+    flag=propsExists(parentOfbuttonlist0,'type','RowLayout')
     if not flag:
         parentOfbuttonlist0=getObjectByLayers(exportWidget,[0,0,0,0])
-    btnListObj=getObjectByLayers(parentOfbuttonlist0,[0,0,3])
+    btnlistObj=getObjectByProperty(parentOfbuttonlist0, 'id','button_list')
+    if btnlistObj:
+        btnlistObj=getObjectByLayers(parentOfbuttonlist0,[0,0,3])
+    if not btnlistObj:
+        return False
     mouseClick(waitForObject(btnListObj))
     #getItemInExportButtonList(btnListObj,3)#kun add in 20210202 save
     #mouseClick(findImage("D:\\Eva\\acq_dallas_automation_test\\images\\saveButton.png"))#Kun mark it as comment at 20210128
@@ -797,7 +801,7 @@ def selectSaveTabOnExportDlg(path):
         snooze(2)
         nativeType("<Return>")
         nativeType("<Return>")
-    
+    return True
 
 #Export to stl or ply format
 def exportFile(format, type, path):
@@ -902,14 +906,16 @@ def exportFile(format, type, path):
 """Export STL or PLY files"""
 def export_STL_PLY(type, path):
     clickExport()
-    selectSaveTabOnExportDlg(path)
+    flag=selectSaveTabOnExportDlg(path)
+    if flag:
+        #Export to STL format
+        exportFile("STL", type, path)
     
-    #Export to STL format
-    exportFile("STL", type, path)
-    
-    #Export to PLY format
-    exportFile("PLY", type, path)
-    test.log("finished export STL PLY files, checked in folder: "+path)
+        #Export to PLY format
+        exportFile("PLY", type, path)
+        test.log("finished export STL PLY files, checked in folder: "+path)
+    else:
+        test.log("this scanflow doesn't contains function which save file to local.")
     
     
     snooze(2)
