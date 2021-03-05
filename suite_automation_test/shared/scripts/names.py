@@ -420,3 +420,7 @@ mainWindow_csStateButton_4 = {"occurrence": 3, "type": "csStateButton", "unnamed
 buttons_ListView = {"container": o_QmlWidget, "id": "buttons", "type": "ListView", "unnamed": 1, "visible": True}
 buttons_Cancel_StyleButton = {"checkable": True, "container": buttons_ListView, "text": "Cancel", "type": "StyleButton", "unnamed": 1, "visible": True}
 cancel_Cancel_Text = {"container": buttons_Cancel_StyleButton, "text": "Cancel", "type": "Text", "unnamed": 1, "visible": True}
+o_Rectangle = {"container": o_QQuickView, "occurrence": 4, "type": "Rectangle", "unnamed": 1, "visible": True}
+txtUsername_ImageTextField = {"container": o_QQuickView, "echoMode": 0, "id": "txtUsername", "type": "ImageTextField", "unnamed": 1, "visible": True}
+o_Image_2 = {"container": o_QQuickView, "source": "qrc:/image/switch_and_check_box/check_box_select.svg", "type": "Image", "unnamed": 1, "visible": True}
+o_Image_4 = {"container": o_QQuickView, "source": "qrc:/image/switch_and_check_box/check_box.svg", "type": "Image", "unnamed": 1, "visible": True}

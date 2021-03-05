@@ -65,7 +65,7 @@ def delAllFiles(path):
 #changeSetting("ENABLE_DATA_RECOVERY", "false")
 changeSetting(xmlFile,'option',{'value': 'false', 'key': 'ENABLE_SN_SCANNER_TYPE_CHECK'})
 changeSetting(xmlFile,'option',{'value': 'false', 'key': 'ENABLE_TT_LICENSE_CHECK'})
-#CSDATASERVICE_REGISTER_HOST is for CSDPP sn testing 
+#CSDATASERVICE_REGISTER_HOST is for CSDPP sn testing
 changeSetting(xmlFile,'option',{'value': 'csddsci.azurewebsites.net', 'key': 'CSDATASERVICE_REGISTER_HOST'})
 delAllFiles(r'D:\data\Export')
 
