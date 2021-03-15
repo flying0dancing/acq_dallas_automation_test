@@ -206,8 +206,18 @@ def getObject(parentObjList,propName,propValue,resultList):
                 getObject(objList,propName,propValue,resultList)
                 
     
+def userLogin(user, password):
+    if object.exists(names.sign_In_StyleButton):
+        loginObj=waitForObject(names.userLoginPart_UserLoginPart) #"objectName": "userLoginPart"
+        btnClear=getObjectByLayers(loginObj,[0,2]) # clear user
+        mouseClick(btnClear)
+        type(getObjectByLayers(loginObj,[0]), user)
+        btnClear=getObjectByLayers(loginObj,[1,2]) # clear password
+        mouseClick(btnClear)
+        type(getObjectByLayers(loginObj,[1]), password)
         
-    
+        mouseClick(waitForObject(names.sign_In_StyleButton)) #click Sign In
+        snooze(2)
                 
         
 #Check buttons after user clicks scan label in home page
