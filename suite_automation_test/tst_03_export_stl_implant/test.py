@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-"
-import names
 
 APPNAME = "cs_scanflow C:\\ProgramData\\TW\\AcqAltair\\InputData.xml"
 file = "D:\\data\\Implant.cszx"

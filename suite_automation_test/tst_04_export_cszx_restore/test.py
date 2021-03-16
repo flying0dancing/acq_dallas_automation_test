@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-"
 
-import names
 import time
 
 APPNAME = "cs_scanflow C:\\ProgramData\\TW\\AcqAltair\\InputData.xml"

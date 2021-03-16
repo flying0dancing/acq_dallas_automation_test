@@ -67,5 +67,6 @@ changeSetting(xmlFile,'option',{'value': 'false', 'key': 'ENABLE_SN_SCANNER_TYPE
 changeSetting(xmlFile,'option',{'value': 'false', 'key': 'ENABLE_TT_LICENSE_CHECK'})
 #CSDATASERVICE_REGISTER_HOST is for CSDPP sn testing
 changeSetting(xmlFile,'option',{'value': 'csddsci.azurewebsites.net', 'key': 'CSDATASERVICE_REGISTER_HOST'})
+changeSetting(xmlFile,'option',{'value': 'qa21.trophy.ovh', 'key': 'CSCONNECT_AUTH_HOST'})
 delAllFiles(r'D:\data\Export')
 

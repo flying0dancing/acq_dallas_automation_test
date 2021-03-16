@@ -206,18 +206,7 @@ def getObject(parentObjList,propName,propValue,resultList):
                 getObject(objList,propName,propValue,resultList)
                 
     
-def userLogin(user, password):
-    if object.exists(names.sign_In_StyleButton):
-        loginObj=waitForObject(names.userLoginPart_UserLoginPart) #"objectName": "userLoginPart"
-        btnClear=getObjectByLayers(loginObj,[0,2]) # clear user
-        mouseClick(btnClear)
-        type(getObjectByLayers(loginObj,[0]), user)
-        btnClear=getObjectByLayers(loginObj,[1,2]) # clear password
-        mouseClick(btnClear)
-        type(getObjectByLayers(loginObj,[1]), password)
-        
-        mouseClick(waitForObject(names.sign_In_StyleButton)) #click Sign In
-        snooze(2)
+
                 
         
 #Check buttons after user clicks scan label in home page
@@ -278,6 +267,7 @@ def scanViewButtonsCheck():
     test.log("Verify buttons in scan view page")
     snooze(2)
     
+ 
 
 # Import data, make sure the scanner isn't plugged in
 def importData(filename, type, flag):
@@ -324,8 +314,8 @@ def checkButtonState(type):
         test.verify(waitForObject(names.toolbar_btn_freeze).visible == True, "Freeze button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_scan_history).visible == True, "Scan history button should be visible.")
         test.verify(waitForObject(names.toolbar_btn_delete_all).visible == True, "Delete button should be visible.")
-       # test.verify(waitForObject(names.toolbar_btn_measurement).visible == True, "Measurement button should be visible.")
-#        if object.exists("..\\..\\..\\images\\scrollUpButton.png"):
+        # test.verify(waitForObject(names.toolbar_btn_measurement).visible == True, "Measurement button should be visible.")
+#       if object.exists("..\\..\\..\\images\\scrollUpButton.png"):
 #            mouseClick(waitForImage("..\\..\\..\\images\\scrollUpButton.png"))
         snooze(2)
         test.verify(waitForObject(names.toolbar_btn_parallelism_check).visible == True, "Parallelism button should be visible.")
@@ -1067,4 +1057,17 @@ def recoverDataDlg():
         msgCancelBtn=getObjectByLayers(msgContent,[4,0,0])
         mouseClick(msgCancelBtn) 
         snooze(3)
+        
+def userLogin(user, password):
+    if object.exists(names.sign_In_StyleButton):
+        loginObj=waitForObject(names.userLoginPart_UserLoginPart) #"objectName": "userLoginPart"
+        btnClear=getObjectByLayers(loginObj,[0,2]) # clear user
+        mouseClick(btnClear)
+        type(getObjectByLayers(loginObj,[0]), user)
+        btnClear=getObjectByLayers(loginObj,[1,2]) # clear password
+        mouseClick(btnClear)
+        type(getObjectByLayers(loginObj,[1]), password)
+        
+        mouseClick(waitForObject(names.sign_In_StyleButton)) #click Sign In
+        snooze(2)   
         

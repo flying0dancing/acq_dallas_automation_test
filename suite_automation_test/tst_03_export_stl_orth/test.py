@@ -1,4 +1,4 @@
-import names
+# -*- coding: utf-8 -*-"
 
 APPNAME = "cs_scanflow C:\\ProgramData\\TW\\AcqAltair\\InputData.xml"
 file = "D:\\data\\Orthodontics.cszx"
