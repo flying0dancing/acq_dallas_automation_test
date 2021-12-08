@@ -423,3 +423,14 @@ cancel_Cancel_Text = {"container": buttons_Cancel_StyleButton, "text": "Cancel",
 
 
 userLoginPart_UserLoginPart = {"container": o_QQuickView, "objectName": "userLoginPart", "type": "UserLoginPart", "visible": True}
+closeButton_StyleButton = {"checkable": False, "container": mainWindow_QmlWidget, "id": "closeButton", "type": "StyleButton", "unnamed": 1, "visible": True}
+
+o_ExitDialog = {"type": "ExitDialog", "unnamed": 1, "visible": 1}
+o_QmlWidget_2 = {"type": "QmlWidget", "unnamed": 1, "visible": 1, "window": o_ExitDialog}
+buttons_ListView_2 = {"container": o_QmlWidget_2, "id": "buttons", "type": "ListView", "unnamed": 1, "visible": True}
+buttons_Exit_StyleButton = {"checkable": True, "container": buttons_ListView_2, "text": "Exit", "type": "StyleButton", "unnamed": 1, "visible": True}
+exit_Exit_Text = {"container": buttons_Exit_StyleButton, "text": "Exit", "type": "Text", "unnamed": 1, "visible": True}
+content_page_SwipeView_2 = {"container": mainWindow_QmlWidget_2, "id": "content_page", "type": "SwipeView", "unnamed": 1, "visible": True}
+content_page_Image = {"container": content_page_SwipeView_2, "source": "qrc:///image/general/general_combobox_down_dark.svg", "type": "Image", "unnamed": 1, "visible": True}
+o_Overlay_2 = {"container": mainWindow_QmlWidget_2, "type": "Overlay", "unnamed": 1, "visible": True}
+o_ItemDelegate_4 = {"checkable": False, "container": o_Overlay_2, "occurrence": 2, "type": "ItemDelegate", "unnamed": 1, "visible": True}

@@ -15,7 +15,9 @@ def main():
     mouseClick(UiTypes.ScreenPoint(410,950), Qt.NoModifier, Qt.LeftButton)
     snooze(2)
     #Import Orth data and check buttons on scan view
-    importData(file, file_type, "normal")    
+    importData(file, file_type, "normal")   
+    # check button status after import
+    checkButtonState(file_type)  
     #Refine mesh
     refineMesh("low")
     #Check buttons after refinement

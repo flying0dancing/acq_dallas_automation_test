@@ -9,7 +9,7 @@ from xml.dom import minidom
 xmlFile = "C:\\ProgramData\\TW\\AcqAltair\\preference.xml"
 
 def changeSetting(xmlfile,tagname,attrdict):
-    print "====Change TT setting to false===="
+    print "==== Change preference.xml setting ===="
     tree = et.parse(xmlfile)
     root = tree.getroot()
     flag=False
@@ -44,7 +44,7 @@ def addNewElement():
 	tree.write(xmlFile)
 
 def changeSettingbk(type, flag):
-    print "====Change TT setting to false===="
+    print "==== Change preference.xml setting ===="
     tree = et.parse(xmlFile)
     root = tree.getroot()
     for child in root.iter("option"):

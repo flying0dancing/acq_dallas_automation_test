@@ -7,7 +7,7 @@ def main():
     #Check buttons for orth file
     adapt_view_check("D:\\data\\Orthodontics.cszx", "orth")
     
-def adapt_view_check(file, type):
+def adapt_view_check(file, file_type):
     snooze(3)
     startApplication(APPNAME)
     #Click ok button on the warn message which says it's an internal version
@@ -18,7 +18,9 @@ def adapt_view_check(file, type):
     
     mouseClick(UiTypes.ScreenPoint(410,950), Qt.NoModifier, Qt.LeftButton)
     #Import Orth data and check buttons on scan view
-    importData(file, type, "normal")    
+    importData(file, file_type, "normal")  
+    # check button status after import
+    checkButtonState(file_type)   
     #Refine mesh
     refineMesh("low")
     snooze(2)

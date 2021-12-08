@@ -279,6 +279,11 @@ def importData(filename, type, flag):
     if object.exists(names.continue_without_signing_in_Text):
         mouseClick(waitForObject(names.continue_without_signing_in_Text))
         snooze(2)
+
+        mouseClick(waitForObject(names.o_Image_2), 30, 32, Qt.LeftButton)
+        mouseClick(waitForObject(names.o_Image_2), 25, 16, Qt.LeftButton)
+        mouseClick(waitForObject(names.exit_Exit_Text))
+
     mouseClick(waitForObject(names.import_StyleLabel))
     snooze(2)
     nativeType(filename)
@@ -297,7 +302,7 @@ def importData(filename, type, flag):
             snooze(3)
             
     test.log("Import data with name: %s" % filename)
-    checkButtonState(type)
+    #checkButtonState(type)
     snooze(2)
     
 #Check buttons with different types
@@ -335,7 +340,7 @@ def checkButtonState(type):
             #test.verify(waitForObject(names.workflow_bar_btn_postscan).checked == False, "The post scan button should be deselected.")
             test.verify(waitForObject(names.toolbar_btn_intraoral).visible == True, "Intraoral button should be visible.")
             test.verify(waitForObject(names.toolbar_btn_lock).visible == True, "Lock button should be visible.")
-            test.verify(waitForObject(names.toolbar_btn_measurement).visible == True, "Measurement button should be visible.")
+            #test.verify(waitForObject(names.toolbar_btn_measurement).visible == True, "Measurement button should be visible.")
             test.verify(waitForObject(names.toolbar_btn_parallelism_check).visible == True, "Parallelism button should be visible.")
             test.log("Verify buttons for postscan data.")
         else:
@@ -805,7 +810,7 @@ def selectSaveTabOnExportDlg(path):
         snooze(2)
         nativeType("<Return>")
         nativeType("<Return>")
-    #
+    snooze(2)
     checkOpenExportPathObj=getObjectByLayers(savePageObj,[0,1,2])#id=cbOpenExportPath
     mouseClick(checkOpenExportPathObj, 47, 16, Qt.LeftButton)
     return True
@@ -856,7 +861,11 @@ def exportFile(format, type, path):
         #mouseClick(waitForObject(names.o_ItemDelegate), 262, 42, Qt.LeftButton)
     elif "STL" == format:
         if "PLY" in exportFormatTxt:
-            mouseClick(arrowDownBtn, 15, 7, Qt.LeftButton)
+
+            mouseClick(waitForObject(names.content_page_Image), 10, 9, Qt.LeftButton)
+            mouseClick(waitForObject(names.o_ItemDelegate_4), 365, 21, Qt.LeftButton)
+            
+            #mouseClick(arrowDownBtn, 15, 7, Qt.LeftButton)
             snooze(1)
             nativeMouseClick(285, 34, MouseButton.LeftButton)
             pass
@@ -923,6 +932,14 @@ def export_STL_PLY(type, path):
         #Export to PLY format
         exportFile("PLY", type, path)
         test.log("finished export STL PLY files, checked in folder: "+path)
+        exportWidget=waitForObject(names.mainWindow_ExportWidget)
+        parentOfbuttonlist0=getObjectByLayers(exportWidget,[0,0,0])
+        flag1=propsExists(object.children(parentOfbuttonlist0)[0], 'id','button_list')
+        if not flag1:
+            parentOfbuttonlist0=getObjectByLayers(exportWidget,[0,0,0,0])
+
+        cancelbtn=getObjectByLayers(parentOfbuttonlist0,[1,0,2,1])# cancel button
+        mouseClick(cancelbtn)
     else:
         test.log("this scanflow doesn't contains function which save file to local.")
     
@@ -1062,12 +1079,28 @@ def userLogin(user, password):
     if object.exists(names.sign_In_StyleButton):
         loginObj=waitForObject(names.userLoginPart_UserLoginPart) #"objectName": "userLoginPart"
         btnClear=getObjectByLayers(loginObj,[0,2]) # clear user
-        mouseClick(btnClear)
+        if propsExists(btnClear,'enabled',True):
+            mouseClick(btnClear)
+            snooze(1)
         type(getObjectByLayers(loginObj,[0]), user)
         btnClear=getObjectByLayers(loginObj,[1,2]) # clear password
-        mouseClick(btnClear)
+        if propsExists(btnClear,'enabled',True):
+            snooze(1)
+            mouseClick(btnClear)
         type(getObjectByLayers(loginObj,[1]), password)
         
         mouseClick(waitForObject(names.sign_In_StyleButton)) #click Sign In
         snooze(2)   
-        
+def closeApplication():
+    test.log("close application")
+    mouseClick(waitForObject(names.closeButton_StyleButton))
+
+    
+    mouseClick(waitForObject(names.exit_Exit_Text))
+    #Wait until save data is done
+    
+    snooze(25)
+    pass
+
+
+
