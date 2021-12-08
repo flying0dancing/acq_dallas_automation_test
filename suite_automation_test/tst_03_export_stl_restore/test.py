@@ -10,6 +10,8 @@ def main():
     startApplication(APPNAME)
     #Click ok button on the warn message which says it's an internal version
     skipInternalVersionDlg()
+    recoverDataDlg()#recover dialog is in front of sign in dialog
+    userLogin("andy.qin@carestream.com","kdis7")
     #Import data
     importData(file, file_type, "normal")
     # check button status after import
