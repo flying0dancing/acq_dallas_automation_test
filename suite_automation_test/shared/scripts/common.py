@@ -1059,6 +1059,7 @@ def killApp():
     
 def skipInternalVersionDlg():
     #Click ok button on the warn message which says it's an internal version
+    snooze(3)
     if object.exists(names.oK_StyleButton):
         mouseClick(waitForObject(names.oK_StyleButton), 153, 30, Qt.LeftButton)
         test.log("Application Under Testing is an internal version")
