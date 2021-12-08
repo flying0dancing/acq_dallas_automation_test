@@ -15,6 +15,8 @@ def main():
     skipInternalVersionDlg()
     #Import data
     importData(file, file_type, "normal")
+    # check button status after import
+    checkButtonState(file_type) 
     
     now = time.strftime("%Y-%m-%d %H-%M-%S_", time.localtime())
     name = now + file_type + '.cszx'

@@ -12,6 +12,8 @@ def main():
     skipInternalVersionDlg()
     #Import data
     importData(file, file_type, "normal")
+    # check button status after import
+    checkButtonState(file_type) 
     #Perform refinement
     refineMesh("standard")
     export_STL_PLY(file_type, "D:\\data\\Export")
