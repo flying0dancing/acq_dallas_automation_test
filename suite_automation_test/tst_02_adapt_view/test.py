@@ -16,6 +16,9 @@ def adapt_view_check(file, file_type):
     #Click ok button on the warn message which says it's an internal version
     skipInternalVersionDlg()
     
+    recoverDataDlg()#recover dialog is in front of sign in dialog
+    userLogin("andy.qin@carestream.com","kdis7")
+    
     mouseClick(UiTypes.ScreenPoint(410,950), Qt.NoModifier, Qt.LeftButton)
     #Import Orth data and check buttons on scan view
     importData(file, file_type, "normal")  
